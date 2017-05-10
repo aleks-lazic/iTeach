@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_today"
+            android:icon="@drawable/ic_today"
+            android:title="@string/TodayNavigation" />
+        <item
+            android:id="@+id/nav_calendar"
+            android:icon="@drawable/ic_calendar"
+            android:title="@string/CalendarNavigation" />
+        <item
+            android:id="@+id/nav_assignments"
+            android:icon="@drawable/ic_assignments"
+            android:title="@string/AssignmentsNavigation" />
+        <item
+            android:id="@+id/nav_lectures"
+            android:icon="@drawable/ic_lectures"
+            android:title="@string/LecturesNavigation" />
+        <item
+            android:id="@+id/nav_students"
+            android:icon="@drawable/ic_students"
+            android:title="@string/StudentsNavigation" />
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_profile"
+            android:title="@string/ProfileNavigation" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_settings"
+            android:title="@string/SettingsNavigation" />
+    </group>
+
+</menu>

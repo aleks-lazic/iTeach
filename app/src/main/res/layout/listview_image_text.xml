@@ -1,0 +1,27 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingTop="20dp"
+    android:weightSum="1">
+
+
+    <ImageView
+        android:id="@+id/calendar_lectures_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/ic_assignments" />
+
+    <TextView
+        android:id="@+id/calendar_lectures_name"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@+id/calendar_lectures_image"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="0.72"
+        android:gravity="top|bottom|left"
+        android:textSize="18sp" />
+</LinearLayout>

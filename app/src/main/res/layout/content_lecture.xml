@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_lecture_content_scrollview"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/activity_lecture">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="@dimen/margin_top"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/activity_lecture_title_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/DescriptionTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/activity_lecture_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_child"
+            android:inputType="textMultiLine"
+            android:maxLines="5" />
+
+        <TextView
+            android:id="@+id/activity_lecture_title_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/TeacherTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/activity_lecture_teacher"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_child" />
+
+        <TextView
+            android:id="@+id/activity_lecture_title_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/DayTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/activity_lecture_day"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_child" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_child"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/activity_lecture_title_starttime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/from"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_title" />
+
+            <TextView
+                android:id="@+id/activity_lecture_starttime"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/activity_lecture_title_endtime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_title" />
+
+            <TextView
+                android:id="@+id/activity_lecture_endtime"
+                android:layout_width="90dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.33"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/activity_lecture_title_students"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/StudentsNavigation"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <ListView
+            android:id="@+id/activity_lecture_students"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

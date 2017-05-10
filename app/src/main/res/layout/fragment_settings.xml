@@ -1,0 +1,18 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/margin_top"
+    tools:context="ch.hes.foreignlanguageschool.Fragments.SettingsFragment">
+
+    <Button
+        android:id="@+id/btnLanguage"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/transparent"
+        android:gravity="left|center_vertical"
+        android:text="@string/Settings"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_title" />
+</LinearLayout>

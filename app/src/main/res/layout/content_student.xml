@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="ch.hes.foreignlanguageschool.Activities.StudentActivity"
+    tools:showIn="@layout/activity_student">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/margin_left"
+        android:layout_marginRight="@dimen/margin_right"
+        android:layout_marginTop="@dimen/margin_top"
+        android:orientation="vertical"
+        android:padding="10dp">
+
+        <TextView
+            android:id="@+id/title_student_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/AddressTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/student_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_child" />
+
+        <TextView
+            android:id="@+id/title_student_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/CountryTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/student_country"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_child" />
+
+        <TextView
+            android:id="@+id/title_student_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/MailTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <TextView
+            android:id="@+id/student_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_child" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/title_startdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/StartDateTitle"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_title" />
+
+            <TextView
+                android:id="@+id/student_startdate"
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.33"
+                android:textAlignment="center" />
+
+            <TextView
+                android:id="@+id/title_enddate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/EndDateTitle"
+                android:textColor="@color/colorAccent"
+                android:textSize="@dimen/text_title" />
+
+            <TextView
+                android:id="@+id/student_enddate"
+                android:layout_width="115dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.33"
+                android:textAlignment="center" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/title_lectures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top"
+            android:text="@string/LecturesNavigation"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <ListView
+            android:id="@+id/student_list_lectures"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp" />
+
+
+    </LinearLayout>
+
+</android.support.v4.widget.NestedScrollView>

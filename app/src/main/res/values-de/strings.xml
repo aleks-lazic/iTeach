@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">iTeach</string>
+    <string name="AssignmentsNavigation">Aufgaben</string>
+    <string name="CalendarNavigation">Kalender</string>
+    <string name="LecturesNavigation">Kurse</string>
+    <string name="SettingsNavigation">Einstellungen</string>
+    <string name="StudentsNavigation">Studenten</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="TeacherTitle">Lehrer</string>
+    <string name="DescriptionTitle">Beschreibung</string>
+    <string name="DueDateTitle">Geburtstermin</string>
+    <string name="AddressTitle">Adresse</string>
+    <string name="CountryTitle">Land</string>
+    <string name="EndDateTitle">End</string>
+    <string name="FistnameTitle">Vorname</string>
+    <string name="LastnameTitle">Nachname</string>
+    <string name="MailTitle">Mail</string>
+    <string name="TodayNavigation">Heute</string>
+
+    <string name="Settings">Sprache</string>
+
+    <string name="chooseLanguage">Wählen Sie eine Sprache</string>
+
+    <string-array name="languages">
+        <item>Englisch</item>
+        <item>Französisch</item>
+        <item>Deutsch</item>
+    </string-array>
+
+    <!--Days of week-->
+    <string-array name="DaysOfWeekUntilSaturday">
+        <item>Montag</item>
+        <item>Dienstag</item>
+        <item>Mittwoch</item>
+        <item>Donnerstag</item>
+        <item>Freitag</item>
+        <item>Samstag</item>
+    </string-array>
+
+
+    <string-array name="MenuItems">
+        <item>Heute</item>
+        <item>Kalender</item>
+        <item>Aufgaben</item>
+        <item>Kurse</item>
+        <item>Studenten</item>
+        <item>Profile</item>
+        <item>Einstellungen</item>
+    </string-array>
+    <string name="DayTitle">Tag</string>
+    <string name="titleDate">Datum</string>
+    <string name="from">Von</string>
+    <string name="to">nach</string>
+    <string name="Assignment">Aufgabe</string>
+    <string name="Lecture">Kurs</string>
+    <string name="hintTitle">Titel</string>
+    <string name="hintName">Name</string>
+    <string name="StartDateTitle">Start</string>
+    <string name="delete">Löschen</string>
+    <string name="more">Mehr</string>
+    <string name="DeletedSuccess">erfolgreich gelöscht</string>
+    <string name="HourAlert">Bitte mal ausfüller</string>
+    <string name="TimeAlert">Endzeit muss nach Startzeit sein</string>
+    <string name="StudentAlert">Wählen Sie mindestens ein Student</string>
+    <string name="SelectTime">Zeit auswählen</string>
+    <string name="SelectDate">Datum auswählen</string>
+    <string name="Student">Schüler</string>
+    <string name="TitleAlert">diese Zeile ist erforderlich</string>
+    <string name="AddCalendar">In Handy Kalender</string>
+    <string name="AllStudents">Alle Schüler sind bereits in diesem Kurs</string>
+    <string name="ProfileNavigation">Profil</string>
+    <string name="startdateenddate">Enddatum muss nach dem Startdatum sein</string>
+    <string name="daySummary">Zusamenfassung der</string>
+    <string name="EndDateStartDate">Enddatum muss nach Startdatum sein</string>
+    <string name="conflict">Konflikt mit einem anderen Vortrag</string>
+</resources>

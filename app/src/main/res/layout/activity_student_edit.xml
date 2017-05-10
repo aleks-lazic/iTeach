@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="ch.hes.foreignlanguageschool.Activities.StudentEdit">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="@dimen/margin_top"
+        android:paddingBottom="@dimen/margin_top"
+        android:orientation="vertical">
+
+
+    <EditText
+        android:id="@+id/editTxtFirstName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/FistnameTitle"
+        android:inputType="textPersonName" />
+
+
+    <EditText
+        android:id="@+id/editTxtLastName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:hint="@string/LastnameTitle"
+        android:inputType="textPersonName" />
+
+
+    <EditText
+        android:id="@+id/editTxtAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:hint="@string/AddressTitle"
+        android:inputType="textPostalAddress" />
+
+    <EditText
+        android:id="@+id/editTxtCountry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:hint="@string/CountryTitle" />
+
+    <EditText
+        android:id="@+id/editTxtMail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:hint="@string/MailTitle"
+        android:inputType="textEmailAddress" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <TextView
+            android:id="@+id/titleStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/StartDateTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <EditText
+            android:id="@+id/datePickerStart"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.33"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/titleEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:text="@string/EndDateTitle"
+            android:textColor="@color/colorAccent"
+            android:textSize="@dimen/text_title" />
+
+        <EditText
+            android:id="@+id/datePickerEnd"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="0.33"
+            android:clickable="false"
+            android:cursorVisible="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textAlignment="center" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+</ScrollView>
