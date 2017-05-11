@@ -19,8 +19,6 @@ public class Day implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
-    private String startTime;
-    private String endTime;
 
     public Day() {
 
@@ -41,22 +39,5 @@ public class Day implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
-    }
-
-    public String getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(String endTime) {
-        this.endTime = endTime;
-    }
-
 
 }

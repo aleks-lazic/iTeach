@@ -79,10 +79,10 @@ public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
 
                 Log.i(TAG, "Teacher name : " + l.getTeacher().getFirstName());
 
-                for (com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student s : l.getStudentsList()
-                        ) {
-                    Log.i(TAG, "Student name : " + s.getFirstName());
-                }
+//                for (com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student s : l.getStudentsList()
+//                        ) {
+//                    Log.i(TAG, "Student name : " + s.getFirstName());
+//                }
             }
         }
     }

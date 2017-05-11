@@ -3,13 +3,21 @@ package ch.hes.foreignlanguageschool.DB;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.example.patrickclivaz.myapplication.backend.lectureApi.model.Day;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 import ch.hes.foreignlanguageschool.Lecture;
+import ch.hes.foreignlanguageschool.LectureAsyncTask;
 import ch.hes.foreignlanguageschool.Student;
+import ch.hes.foreignlanguageschool.Teacher;
+import ch.hes.foreignlanguageschool.TeacherAsyncTask;
 
 /**
  * Created by patrickclivaz on 11.04.17.
@@ -18,6 +26,8 @@ import ch.hes.foreignlanguageschool.Student;
 public class DBLecture {
 
     private DatabaseHelper db;
+    private DBDay dbDay;
+    private DBStudent dbStudent;
 
     public DBLecture(DatabaseHelper db) {
         this.db = db;
@@ -26,6 +36,7 @@ public class DBLecture {
 
     /**
      * insert values for lecture in db
+     *
      * @param name
      * @param description
      * @param idTeacher
@@ -46,6 +57,7 @@ public class DBLecture {
 
     /**
      * get all lectures for a teacher
+     *
      * @param idTeacher
      * @return
      */
@@ -86,6 +98,7 @@ public class DBLecture {
 
     /**
      * get all lectures for a student
+     *
      * @param idStudent
      * @return
      */
@@ -122,6 +135,7 @@ public class DBLecture {
 
     /**
      * get lecture by id
+     *
      * @param idLecture
      * @return
      */
@@ -160,6 +174,7 @@ public class DBLecture {
 
     /**
      * get lecture by id when there's an update
+     *
      * @param idLecture
      * @return
      */
@@ -209,6 +224,7 @@ public class DBLecture {
 
     /**
      * get alle lectures except the parameter id
+     *
      * @param idLecture
      * @return
      */
@@ -262,6 +278,7 @@ public class DBLecture {
 
     /**
      * get all lectures for db
+     *
      * @return
      */
     public ArrayList<Lecture> getAllLectures() {
@@ -313,6 +330,7 @@ public class DBLecture {
 
     /**
      * add a student to a lecture
+     *
      * @param idStudent
      * @param idLecture
      */
@@ -332,6 +350,7 @@ public class DBLecture {
 
     /**
      * add students to lecture
+     *
      * @param students
      * @param idLecture
      */
@@ -346,6 +365,7 @@ public class DBLecture {
 
     /**
      * Add day and hours to the lecture
+     *
      * @param idLecture
      * @param idDay
      * @param startTime
@@ -366,6 +386,7 @@ public class DBLecture {
 
     /**
      * Get lectures for special date used in calendar
+     *
      * @param year
      * @param month
      * @param dayOfMonth
@@ -434,6 +455,7 @@ public class DBLecture {
 
     /**
      * get Max Id for lecture's table
+     *
      * @return
      */
     public int getMaxId() {
@@ -456,6 +478,7 @@ public class DBLecture {
 
     /**
      * insert a lecture with all informations directly
+     *
      * @param title
      * @param description
      * @param idTeacher
@@ -478,6 +501,7 @@ public class DBLecture {
 
     /**
      * Get lectures for current date in today fragment
+     *
      * @param date
      * @return
      */
@@ -543,6 +567,7 @@ public class DBLecture {
 
     /**
      * delete a lecture
+     *
      * @param idLecture
      */
     public void deleteLecture(int idLecture) {
@@ -554,6 +579,7 @@ public class DBLecture {
 
     /**
      * delete the lecture in lecture table
+     *
      * @param idLecture
      */
     private void deleteLectureById(int idLecture) {
@@ -568,6 +594,7 @@ public class DBLecture {
 
     /**
      * delete the lecture in lecturestudent table
+     *
      * @param idLecture
      */
     public void deleteLectureFromLectureStudent(int idLecture) {
@@ -582,6 +609,7 @@ public class DBLecture {
 
     /**
      * delete the lecture from lecturedate table
+     *
      * @param idLecture
      */
     private void deleteDayFromLecture(int idLecture) {
@@ -595,6 +623,7 @@ public class DBLecture {
 
     /**
      * Update a lecture name and description
+     *
      * @param idLecture
      * @param name
      * @param description
@@ -614,6 +643,7 @@ public class DBLecture {
 
     /**
      * upadte day and time for a lecture
+     *
      * @param idLecture
      * @param oldIdDay
      * @param idDay
@@ -640,6 +670,7 @@ public class DBLecture {
 
     /**
      * get the good day of the week depending on the calendar
+     *
      * @param day
      * @return
      */
@@ -660,5 +691,69 @@ public class DBLecture {
         }
 
         return 7;
+    }
+
+    public void syncLecturesToCloud() {
+
+        List<Lecture> lectures = getAllLectures();
+
+        for (Lecture l : lectures
+                ) {
+            com.example.patrickclivaz.myapplication.backend.lectureApi.model.Lecture lecture = new com.example.patrickclivaz.myapplication.backend.lectureApi.model.Lecture();
+
+            lecture.setId((long) l.getId());
+            lecture.setName(l.getName());
+            lecture.setDescription(l.getDescription());
+            lecture.setImageName(l.getImageName());
+            lecture.setStartTime(l.getStartTime());
+            lecture.setEndTime((l.getEndTime()));
+
+            //create the lecture's teacher
+            com.example.patrickclivaz.myapplication.backend.lectureApi.model.Teacher teacher = new com.example.patrickclivaz.myapplication.backend.lectureApi.model.Teacher();
+            teacher.setId((long) l.getTeacher().getId());
+            teacher.setFirstName(l.getTeacher().getFirstName());
+            teacher.setLastName(l.getTeacher().getLastName());
+            teacher.setMail(l.getTeacher().getMail());
+            teacher.setImageName(l.getTeacher().getImageName());
+            lecture.setTeacher(teacher);
+
+            //create the lecture's day
+            Day day = new Day();
+            dbDay = new DBDay(db);
+            ch.hes.foreignlanguageschool.Day lectureDay = dbDay.getDayById(l.getIdDay());
+            day.setId((long) lectureDay.getId());
+            day.setName(lectureDay.getName());
+            lecture.setDay(day);
+
+
+            //create the lecture's students
+            dbStudent = new DBStudent(db);
+            l.setStudentsList(dbStudent.getStudentsListByLecture(l.getId()));
+            ArrayList<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student> students = new ArrayList<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student>();
+            for (Student s : l.getStudentsList()
+                    ) {
+
+                com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student student = new com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student();
+
+                student.setId((long) s.getId());
+                student.setFirstName(s.getFirstName());
+                student.setLastName(s.getLastName());
+                student.setAddress(s.getAddress());
+                student.setCountry(s.getCountry());
+                student.setMail(s.getMail());
+                student.setStartDate(s.getStartDate());
+                student.setEndDate(s.getEndDate());
+                student.setImageName(s.getImageName());
+
+                students.add(student);
+            }
+
+            lecture.setStudentsList(students);
+
+            new LectureAsyncTask(lecture).execute();
+
+        }
+
+        Log.e("Aleks", "All letures into the cloud");
     }
 }

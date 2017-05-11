@@ -114,6 +114,7 @@ public class SettingsFragment extends Fragment {
                 dbStudent.syncStudentsToCloud();
                 dbTeacher.syncTeachersToCloud();
                 dbDay.syncDaysToCloud();
+                dbLecture.syncLecturesToCloud();
 
             }
         });
