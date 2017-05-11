@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.DB.DBAssignment;
+import ch.hes.foreignlanguageschool.DB.DBDay;
+
 
 public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
     private static DayApi dayApi = null;
@@ -71,6 +75,9 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
     //of this method
     @Override
     protected void onPostExecute(List<Day> result) {
+
+        DBDay dbDay = new DBDay(NavigationActivity.databaseHelper);
+        dbDay.retrieveDays(result);
 
         if (result != null) {
             for (Day day: result) {

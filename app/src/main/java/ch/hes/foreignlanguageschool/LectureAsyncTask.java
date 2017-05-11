@@ -16,13 +16,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.DB.DBAssignment;
+import ch.hes.foreignlanguageschool.DB.DBLecture;
+
 
 public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
     private static LectureApi lectureApi = null;
     private static final String TAG = LectureAsyncTask.class.getName();
     private Lecture lecture;
 
-    public LectureAsyncTask(){
+    public LectureAsyncTask() {
 
     }
 
@@ -73,16 +77,15 @@ public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
     @Override
     protected void onPostExecute(List<Lecture> result) {
 
+        DBLecture dbLecture = new DBLecture(NavigationActivity.databaseHelper);
+        dbLecture.retrieveLecture(result);
+
         if (result != null) {
             for (Lecture l : result) {
                 Log.i(TAG, "Title : " + l.getName());
 
                 Log.i(TAG, "Teacher name : " + l.getTeacher().getFirstName());
 
-//                for (com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student s : l.getStudentsList()
-//                        ) {
-//                    Log.i(TAG, "Student name : " + s.getFirstName());
-//                }
             }
         }
     }

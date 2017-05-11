@@ -35,7 +35,7 @@ public class DBAssignment {
      * @param idTeacher
      * @param addedToCalendar
      */
-    public void insertValues(String title, String description, String date, int idTeacher, int addedToCalendar) {
+    public void insertValues(String title, String description, String date, long idTeacher, int addedToCalendar) {
 
         SQLiteDatabase sql = db.getWritableDatabase();
 
@@ -195,6 +195,7 @@ public class DBAssignment {
             assignment.setId((long) a.getId());
             assignment.setTitle(a.getTitle());
             assignment.setDescription(a.getDescription());
+            assignment.setDate(a.getDate());
             Teacher teacher = new Teacher();
             teacher.setId((long) a.getTeacher().getId());
             teacher.setFirstName(a.getTeacher().getFirstName());
@@ -210,5 +211,21 @@ public class DBAssignment {
         }
 
         Log.e("Aleks", "All assignments into the cloud");
+    }
+
+    public void retrieveAssignments(List<com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment> assignments) {
+
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+        sql.delete(db.getTableAssignement(), null, null);
+
+        for (com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment a : assignments
+                ) {
+
+            int flag = a.getAddedToCalendar() ? 1 : 0;
+            insertValues(a.getTitle(), a.getDescription(), a.getDate(), Integer.parseInt(a.getTeacher().getId()+""), flag);
+        }
+
+
     }
 }

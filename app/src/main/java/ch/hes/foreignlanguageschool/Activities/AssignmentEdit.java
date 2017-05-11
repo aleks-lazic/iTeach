@@ -132,7 +132,7 @@ public class AssignmentEdit extends AppCompatActivity {
             String title = txtViewTitle.getText().toString();
             String description = txtViewDescription.getText().toString();
             String date = txtViewDueDate.getText().toString();
-            int idTeacher = NavigationActivity.currentTeacher.getId();
+            long idTeacher = NavigationActivity.currentTeacher.getId();
             int isChecked = 0;
             if (checkBoxCalendar.isChecked()) {
                 addToPhoneCalendar(title, description, date);

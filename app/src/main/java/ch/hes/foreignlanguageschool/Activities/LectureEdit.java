@@ -223,7 +223,7 @@ public class LectureEdit extends AppCompatActivity {
             //insert everything in DB
             String title = txtTitle.getText().toString();
             String description = txtDescription.getText().toString();
-            int idTeacher = NavigationActivity.currentTeacher.getId();
+            long idTeacher = NavigationActivity.currentTeacher.getId();
             int idDay = day.getId();
             String timeFrom = editTxtTimePickerFrom.getText().toString();
             String timeTo = editTxtTimePickerTo.getText().toString();

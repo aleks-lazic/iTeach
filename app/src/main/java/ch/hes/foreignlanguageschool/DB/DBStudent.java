@@ -263,4 +263,16 @@ public class DBStudent {
 
         Log.e("Aleks", "All students into the cloud");
     }
+
+    public void retrieveStudents(List<com.example.patrickclivaz.myapplication.backend.studentApi.model.Student> students) {
+
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+        sql.delete(db.getTableStudent(), null, null);
+
+        for (com.example.patrickclivaz.myapplication.backend.studentApi.model.Student s : students
+                ) {
+            insertValues(s.getFirstName(), s.getLastName(), s.getAddress(), s.getCountry(), s.getMail(), s.getStartDate(), s.getEndDate());
+        }
+    }
 }

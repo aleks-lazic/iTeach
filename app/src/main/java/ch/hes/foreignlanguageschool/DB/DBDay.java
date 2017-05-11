@@ -135,4 +135,19 @@ public class DBDay {
 
         Log.e("Aleks", "All days into the cloud");
     }
+
+
+    public void retrieveDays(List<com.example.patrickclivaz.myapplication.backend.dayApi.model.Day> days) {
+
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+        sql.delete(db.getTableDay(), null, null);
+
+        for (com.example.patrickclivaz.myapplication.backend.dayApi.model.Day d : days
+                ) {
+            insertValues(d.getName());
+        }
+
+
+    }
 }

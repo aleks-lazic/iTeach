@@ -41,7 +41,7 @@ public class DBLecture {
      * @param description
      * @param idTeacher
      */
-    public void insertValues(String name, String description, int idTeacher) {
+    public void insertValues(String name, String description, long idTeacher) {
 
         SQLiteDatabase sql = db.getWritableDatabase();
 
@@ -487,7 +487,7 @@ public class DBLecture {
      * @param endTime
      * @param students
      */
-    public void insertLectureWithTeacherDayAndHoursAndStudents(String title, String description, int idTeacher, int idDay, String beginTime, String endTime, ArrayList<Student> students) {
+    public void insertLectureWithTeacherDayAndHoursAndStudents(String title, String description, long idTeacher, int idDay, String beginTime, String endTime, ArrayList<Student> students) {
 
         insertValues(title, description, idTeacher);
 
@@ -756,4 +756,31 @@ public class DBLecture {
 
         Log.e("Aleks", "All letures into the cloud");
     }
+
+    public void retrieveLecture(List<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Lecture> lectures) {
+
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+        sql.delete(db.getTableLecture(), null, null);
+        sql.delete(db.getTableLecturedate(), null, null);
+        sql.delete(db.getTableLecturestudent(), null, null);
+
+        for (com.example.patrickclivaz.myapplication.backend.lectureApi.model.Lecture l : lectures
+                ) {
+
+            //insert the lecture's values
+            insertValues(l.getName(), l.getDescription(), (Integer.parseInt(l.getTeacher().getId()+"")));
+
+            //insert the student
+            for (com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student s : l.getStudentsList()
+                 ) {
+                addStudentToLecture(Integer.parseInt(s.getId()+""),Integer.parseInt(l.getId()+""));
+            }
+
+            //insert day values
+            addDayAndHoursToLecture(Integer.parseInt(l.getId()+""),Integer.parseInt(l.getDay().getId()+""),l.getStartTime(), l.getEndTime());
+        }
+    }
+
+
 }

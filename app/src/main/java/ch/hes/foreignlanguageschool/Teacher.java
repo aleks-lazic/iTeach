@@ -15,7 +15,7 @@ public class Teacher implements Serializable {
     //Singleton unique instance
     private static Teacher currentTeacher;
     private static DBTeacher dbTeacher;
-    private int id;
+    private long id;
     private String firstName;
     private String lastName;
     private String mail;
@@ -48,11 +48,11 @@ public class Teacher implements Serializable {
     }
 
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

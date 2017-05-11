@@ -56,7 +56,7 @@ public class DBTeacher {
      * @param idTeacher
      * @return
      */
-    public Teacher getTeacherById(int idTeacher) {
+    public Teacher getTeacherById(long idTeacher) {
         SQLiteDatabase sql = db.getReadableDatabase();
 
         Teacher teacher = new Teacher();
@@ -74,19 +74,14 @@ public class DBTeacher {
             cursor.moveToFirst();
         }
 
-        DBLecture dbLecture = new DBLecture(db);
 
-
-        teacher.setId(Integer.parseInt(cursor.getString(0)));
+        teacher.setId(Long.valueOf(cursor.getString(0)).longValue());
         teacher.setFirstName(cursor.getString(1));
         teacher.setLastName(cursor.getString(2));
         teacher.setMail(cursor.getString(3));
         teacher.setImageName(cursor.getString(4));
 
         sql.close();
-
-        teacher.setLecturesList(dbLecture.getLecturesForTeacher(idTeacher));
-
 
         // return teacher
         return teacher;
@@ -101,7 +96,7 @@ public class DBTeacher {
      * @param mail
      * @return
      */
-    public int updateTeacherById(int idTeacher, String firstName, String lastName, String mail) {
+    public int updateTeacherById(long idTeacher, String firstName, String lastName, String mail) {
         SQLiteDatabase sql = db.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -155,6 +150,7 @@ public class DBTeacher {
 
     /**
      * Count the number of rows in the teacher table
+     *
      * @return
      */
     public long getNumberOfRowsInTableTeacher() {
@@ -184,6 +180,18 @@ public class DBTeacher {
         }
 
         Log.e("Aleks", "All teachers into the cloud");
+    }
+
+    public void retrieveTeacher(List<com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher> teachers) {
+
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+        sql.delete(db.getTableTeacher(), null, null);
+
+        for (com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher t : teachers
+                ) {
+            insertValues(t.getFirstName(), t.getLastName(), t.getMail());
+        }
     }
 
 }

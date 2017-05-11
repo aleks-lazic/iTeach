@@ -17,17 +17,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-//import ch.hes.foreignlanguageschool.
-
-
-import com.example.patrickclivaz.myapplication.backend.studentApi.model.Student;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
+import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
+import ch.hes.foreignlanguageschool.DayAsyncTask;
+import ch.hes.foreignlanguageschool.LectureAsyncTask;
 import ch.hes.foreignlanguageschool.StudentAsyncTask;
 import ch.hes.foreignlanguageschool.Teacher;
 import ch.hes.foreignlanguageschool.DB.DBDay;
@@ -41,6 +41,7 @@ import ch.hes.foreignlanguageschool.Fragments.SettingsFragment;
 import ch.hes.foreignlanguageschool.Fragments.StudentsFragment;
 import ch.hes.foreignlanguageschool.Fragments.TodayFragment;
 import ch.hes.foreignlanguageschool.R;
+import ch.hes.foreignlanguageschool.TeacherAsyncTask;
 
 import static android.os.Build.VERSION_CODES.M;
 
@@ -73,7 +74,7 @@ public class NavigationActivity extends AppCompatActivity
     private String currentDate;
 
     //Database
-    private DatabaseHelper databaseHelper;
+    public static DatabaseHelper databaseHelper;
     private DBTeacher dbTeacher;
     private DBDay dbDay;
 
@@ -84,30 +85,19 @@ public class NavigationActivity extends AppCompatActivity
         loadLastLanguage();
         setContentView(R.layout.activity_navigation);
 
-        testCloudInsert();
+        databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
         getCloudRetrieve();
-
         checkPermissions();
 
-        databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
 
         //create the current teacher like if he was logged in
         dbTeacher = new DBTeacher(databaseHelper);
         dbDay = new DBDay(databaseHelper);
 
+
         if (dbTeacher.getNumberOfRowsInTableTeacher() == 0) {
+            Log.d("Aleks", "Je dois rajouter teacher manuellement...");
             dbTeacher.insertValues("Predrag", "Ljubicic", "pedjo.ljubo@mail.srb");
-        }
-
-        if(dbDay.getNumberOfRowsInTableDay() == 0) {
-            dbDay.insertValues("Monday");
-            dbDay.insertValues("Tuesday");
-            dbDay.insertValues("Wednesday");
-            dbDay.insertValues("Thursday");
-            dbDay.insertValues("Friday");
-            dbDay.insertValues("Saturday");
-            dbDay.insertValues("Sunday");
-
         }
 
         currentTeacher = dbTeacher.getTeacherById(1);
@@ -367,24 +357,12 @@ public class NavigationActivity extends AppCompatActivity
     }
 
 
-    private void testCloudInsert(){
-        Student student = new Student();
-        long id = 1;
-        student.setId(id);
-        student.setFirstName("Flav");
-        student.setLastName("Bonvin");
-        student.setAddress("caca");
-        student.setCountry("suisse");
-        student.setStartDate("25.10.2015");
-        student.setEndDate("30.10.2016");
-        student.setMail("flav.bonvin@gmail.com");
-        student.setImageName("hello");
-
-        new StudentAsyncTask(student).execute();
-    }
-
-    private void getCloudRetrieve(){
+    private void getCloudRetrieve() {
+        new DayAsyncTask().execute();
+//        new TeacherAsyncTask().execute();
         new StudentAsyncTask().execute();
+        new AssignmentAsyncTask().execute();
+        new LectureAsyncTask().execute();
     }
 
 

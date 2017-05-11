@@ -15,6 +15,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.DB.DBAssignment;
+import ch.hes.foreignlanguageschool.DB.DBTeacher;
+
 
 public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
     private static TeacherApi teacherApi = null;
@@ -71,6 +75,9 @@ public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
     //of this method
     @Override
     protected void onPostExecute(List<Teacher> result) {
+
+        DBTeacher dbTeacher = new DBTeacher(NavigationActivity.databaseHelper);
+        dbTeacher.retrieveTeacher(result);
 
         if (result != null) {
             for (Teacher t : result) {
