@@ -76,4 +76,5 @@
     <string name="EndDateStartDate">La date de fin doit être après la date de début</string>
     <string name="conflict">Conflit avec un autre cours</string>
     <string name="sync">Synchronisation des données</string>
+    <string name="patienter">Merci de patienter quelques secondes, nous chargeons le contenu de votre application</string>
 </resources>

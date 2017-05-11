@@ -186,6 +186,7 @@
     <string name="EndDateStartDate">End date must be after Start date</string>
     <string name="conflict">Conflict with another lecture</string>
     <string name="sync">Data synchronization</string>
+    <string name="patienter">Please wait a few seconds, we are loading the contents of your application</string>
 
 
 </resources>

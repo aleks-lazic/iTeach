@@ -187,11 +187,15 @@ public class DBTeacher {
         SQLiteDatabase sql = db.getReadableDatabase();
 
         sql.delete(db.getTableTeacher(), null, null);
+        Log.d("TeacherAsync", " taille table teacher " + getNumberOfRowsInTableTeacher());
 
         for (com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher t : teachers
                 ) {
             insertValues(t.getFirstName(), t.getLastName(), t.getMail());
         }
+
+        Log.d("TeacherAsync", " taille table teacher " + getNumberOfRowsInTableTeacher());
+
     }
 
 }

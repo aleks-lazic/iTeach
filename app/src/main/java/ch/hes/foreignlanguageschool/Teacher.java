@@ -12,41 +12,14 @@ import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 
 public class Teacher implements Serializable {
 
-    //Singleton unique instance
-    private static Teacher currentTeacher;
-    private static DBTeacher dbTeacher;
     private long id;
     private String firstName;
     private String lastName;
     private String mail;
-    private List<Assignment> assignmentList;
     private String imageName;
-    private List<Lecture> lecturesList;
-
-    private Teacher(int id, String firstName, String lastName, String mail) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.mail = mail;
-
-    }
 
     public Teacher() {
     }
-
-    public static Teacher getInstance(DatabaseHelper db, int idTeacher) {
-
-        if (currentTeacher == null) {
-            dbTeacher = new DBTeacher(db);
-            currentTeacher = dbTeacher.getTeacherById(idTeacher);
-            return currentTeacher;
-        }
-
-        return currentTeacher;
-
-
-    }
-
 
     public long getId() {
         return id;
@@ -80,14 +53,6 @@ public class Teacher implements Serializable {
         this.mail = mail;
     }
 
-    public List<Assignment> getAssignmentList() {
-        return assignmentList;
-    }
-
-    public void setAssignmentList(List<Assignment> assignmentList) {
-        this.assignmentList = assignmentList;
-    }
-
     public String getImageName() {
         return imageName;
     }
@@ -98,14 +63,6 @@ public class Teacher implements Serializable {
 
     public String toString() {
         return firstName + " " + lastName;
-    }
-
-    public List<Lecture> getLecturesList() {
-        return lecturesList;
-    }
-
-    public void setLecturesList(List<Lecture> lecturesList) {
-        this.lecturesList = lecturesList;
     }
 
     @Override

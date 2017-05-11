@@ -93,7 +93,7 @@ public class LectureEdit extends AppCompatActivity {
 
         editTxtTimePickerTo.setText("");
         editTxtTimePickerFrom.setText("");
-        txtTeacherName.setText(NavigationActivity.currentTeacher.toString());
+        txtTeacherName.setText(NavigationActivity.teacher.toString());
         daysOfWeek = getResources().getStringArray(R.array.DaysOfWeekUntilSaturday);
 
         //create database objects
@@ -223,7 +223,7 @@ public class LectureEdit extends AppCompatActivity {
             //insert everything in DB
             String title = txtTitle.getText().toString();
             String description = txtDescription.getText().toString();
-            long idTeacher = NavigationActivity.currentTeacher.getId();
+            long idTeacher = NavigationActivity.teacher.getId();
             int idDay = day.getId();
             String timeFrom = editTxtTimePickerFrom.getText().toString();
             String timeTo = editTxtTimePickerTo.getText().toString();

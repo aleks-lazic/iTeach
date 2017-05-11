@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBLecture;
 
@@ -77,7 +78,7 @@ public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
     @Override
     protected void onPostExecute(List<Lecture> result) {
 
-        DBLecture dbLecture = new DBLecture(NavigationActivity.databaseHelper);
+        DBLecture dbLecture = new DBLecture(SyncActivity.databaseHelper);
         dbLecture.retrieveLecture(result);
 
         if (result != null) {
@@ -88,5 +89,8 @@ public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
 
             }
         }
+
+        SyncActivity.lectureFlag = true;
+
     }
 }

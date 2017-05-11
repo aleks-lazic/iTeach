@@ -74,13 +74,13 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         txtFirstName = (EditText) view.findViewById(R.id.teacher_firstname);
-        txtFirstName.setText(NavigationActivity.currentTeacher.getFirstName());
+        txtFirstName.setText(NavigationActivity.teacher.getFirstName());
 
         txtLastName = (EditText) view.findViewById(R.id.teacher_lastname);
-        txtLastName.setText(NavigationActivity.currentTeacher.getLastName());
+        txtLastName.setText(NavigationActivity.teacher.getLastName());
 
         txtMail = (EditText) view.findViewById(R.id.teacher_mail);
-        txtMail.setText(NavigationActivity.currentTeacher.getMail());
+        txtMail.setText(NavigationActivity.teacher.getMail());
 
         setEditable(false);
 
@@ -129,8 +129,8 @@ public class ProfileFragment extends Fragment {
             String lastname = txtLastName.getText().toString();
             String mail = txtMail.getText().toString();
 
-            dbTeacher.updateTeacherById(NavigationActivity.currentTeacher.getId(), fistname, lastname, mail);
-            NavigationActivity.currentTeacher = dbTeacher.getTeacherById(1);
+            dbTeacher.updateTeacherById(NavigationActivity.teacher.getId(), fistname, lastname, mail);
+            NavigationActivity.teacher = dbTeacher.getTeacherById(1);
             NavigationActivity.setNavigationView();
 
             setEditable(false);

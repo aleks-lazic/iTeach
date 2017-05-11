@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBTeacher;
 
@@ -75,16 +76,19 @@ public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
     //of this method
     @Override
     protected void onPostExecute(List<Teacher> result) {
-
-        DBTeacher dbTeacher = new DBTeacher(NavigationActivity.databaseHelper);
+        DBTeacher dbTeacher = new DBTeacher(SyncActivity.databaseHelper);
         dbTeacher.retrieveTeacher(result);
+
 
         if (result != null) {
             for (Teacher t : result) {
-                Log.i(TAG, "Teacher name : " + t.getFirstName());
-
-
+                Log.e(TAG, "Teacher name : " + t.getFirstName() + "Teacher id : " + t.getId());
             }
         }
+
+
+        SyncActivity.teacherFlag = true;
+
+
     }
 }

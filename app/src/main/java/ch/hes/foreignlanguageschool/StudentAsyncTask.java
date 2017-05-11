@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBStudent;
 
@@ -78,7 +79,7 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
     @Override
     protected void onPostExecute(List<Student> result) {
 
-        DBStudent dbStudent = new DBStudent(NavigationActivity.databaseHelper);
+        DBStudent dbStudent = new DBStudent(SyncActivity.databaseHelper);
         dbStudent.retrieveStudents(result);
 
         if (result != null) {
@@ -86,5 +87,7 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
                 Log.i(TAG, "Title : " + s.getFirstName() + "\n result size : " + result.size());
             }
         }
+
+        SyncActivity.studentFlag = true;
     }
 }

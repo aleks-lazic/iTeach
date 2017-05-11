@@ -48,7 +48,6 @@ import static android.os.Build.VERSION_CODES.M;
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    public static Teacher currentTeacher;
     private static NavigationView navigationView;
 
     //tags used to attach the fragments
@@ -70,13 +69,10 @@ public class NavigationActivity extends AppCompatActivity
     private Toolbar toolbar;
     private Handler mHandler;
 
-    private SimpleDateFormat simpleDateFormat;
-    private String currentDate;
-
     //Database
     public static DatabaseHelper databaseHelper;
     private DBTeacher dbTeacher;
-    private DBDay dbDay;
+    public static Teacher teacher;
 
 
     @Override
@@ -85,22 +81,18 @@ public class NavigationActivity extends AppCompatActivity
         loadLastLanguage();
         setContentView(R.layout.activity_navigation);
 
-        databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
-        getCloudRetrieve();
         checkPermissions();
 
 
-        //create the current teacher like if he was logged in
-        dbTeacher = new DBTeacher(databaseHelper);
-        dbDay = new DBDay(databaseHelper);
 
+//        //create the current teacher like if he was logged in
+//        dbTeacher = new DBTeacher(databaseHelper);
 
-        if (dbTeacher.getNumberOfRowsInTableTeacher() == 0) {
-            Log.d("Aleks", "Je dois rajouter teacher manuellement...");
-            dbTeacher.insertValues("Predrag", "Ljubicic", "pedjo.ljubo@mail.srb");
-        }
+//        if (dbTeacher.getNumberOfRowsInTableTeacher() == 0) {
+//            Log.d("Aleks", "Je dois rajouter teacher manuellement...");
+//            dbTeacher.insertValues("Predrag", "Ljubicic", "pedjo.ljubo@mail.srb");
+//        }
 
-        currentTeacher = dbTeacher.getTeacherById(1);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -108,6 +100,10 @@ public class NavigationActivity extends AppCompatActivity
         mHandler = new Handler();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
+        databaseHelper = DatabaseHelper.getInstance(this);
+        dbTeacher = new DBTeacher(databaseHelper);
+        teacher = dbTeacher.getTeacherById(1);
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         setNavigationView();
@@ -123,6 +119,7 @@ public class NavigationActivity extends AppCompatActivity
         toggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
 
         if (savedInstanceState == null) {
             navItemIndex = 0;
@@ -350,20 +347,14 @@ public class NavigationActivity extends AppCompatActivity
 
         View hView = navigationView.getHeaderView(0);
         TextView nav_user = (TextView) hView.findViewById(R.id.name);
-        nav_user.setText(currentTeacher.toString());
+        nav_user.setText(teacher.toString());
 
         TextView nav_mail = (TextView) hView.findViewById(R.id.mail);
-        nav_mail.setText(currentTeacher.getMail());
+        nav_mail.setText(teacher.getMail());
     }
 
 
-    private void getCloudRetrieve() {
-        new DayAsyncTask().execute();
-//        new TeacherAsyncTask().execute();
-        new StudentAsyncTask().execute();
-        new AssignmentAsyncTask().execute();
-        new LectureAsyncTask().execute();
-    }
+
 
 
 }

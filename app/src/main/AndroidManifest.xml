@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Activities.NavigationActivity"
+            android:name=".Activities.SyncActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
@@ -54,6 +54,8 @@
         <activity
             android:name=".Activities.StudentEdit"
             android:screenOrientation="portrait" />
+        <activity android:name=".Activities.NavigationActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBTeacher;
 
@@ -77,7 +78,7 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
     protected void onPostExecute(List<Assignment> result) {
 
 
-        DBAssignment dbAssignment = new DBAssignment(NavigationActivity.databaseHelper);
+        DBAssignment dbAssignment = new DBAssignment(SyncActivity.databaseHelper);
         dbAssignment.retrieveAssignments(result);
         if (result != null) {
             for (Assignment assignment : result) {
@@ -87,5 +88,7 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
 
             }
         }
+
+        SyncActivity.assignmentFlag = true;
     }
 }

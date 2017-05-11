@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBDay;
 
@@ -76,7 +77,7 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
     @Override
     protected void onPostExecute(List<Day> result) {
 
-        DBDay dbDay = new DBDay(NavigationActivity.databaseHelper);
+        DBDay dbDay = new DBDay(SyncActivity.databaseHelper);
         dbDay.retrieveDays(result);
 
         if (result != null) {
@@ -86,5 +87,8 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
 
             }
         }
+
+        SyncActivity.dayFlag = true;
+
     }
 }
