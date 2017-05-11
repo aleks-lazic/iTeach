@@ -19,9 +19,9 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import ch.hes.foreignlanguageschool.Adapters.CustomAdapterStudent;
-import ch.hes.foreignlanguageschool.DAO.Day;
-import ch.hes.foreignlanguageschool.DAO.Lecture;
-import ch.hes.foreignlanguageschool.DAO.Student;
+import ch.hes.foreignlanguageschool.Day;
+import ch.hes.foreignlanguageschool.Lecture;
+import ch.hes.foreignlanguageschool.Student;
 import ch.hes.foreignlanguageschool.DB.DBDay;
 import ch.hes.foreignlanguageschool.DB.DBLecture;
 import ch.hes.foreignlanguageschool.DB.DBStudent;

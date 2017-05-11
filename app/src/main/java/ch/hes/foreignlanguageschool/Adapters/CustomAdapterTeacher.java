@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import ch.hes.foreignlanguageschool.DAO.Teacher;
+import ch.hes.foreignlanguageschool.Teacher;
 import ch.hes.foreignlanguageschool.R;
 
 /**

@@ -30,4 +30,11 @@ dependencies {
     compile 'com.google.code.findbugs:jsr305:2.0.1'
     testCompile 'junit:junit:4.12'
     compile project(path: ':backend', configuration: 'android-endpoints')
+
+    compile ('com.google.api-client:google-api-client-android:1.17.0-rc') {
+        exclude module: 'httpclient'
+    }
+    compile ('com.google.http-client:google-http-client-gson:1.17.0-rc') {
+        exclude module: 'httpclient'
+    }
 }

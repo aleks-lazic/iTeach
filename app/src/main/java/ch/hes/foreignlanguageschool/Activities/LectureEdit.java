@@ -30,9 +30,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import ch.hes.foreignlanguageschool.DAO.Day;
-import ch.hes.foreignlanguageschool.DAO.Lecture;
-import ch.hes.foreignlanguageschool.DAO.Student;
+import ch.hes.foreignlanguageschool.Day;
+import ch.hes.foreignlanguageschool.Lecture;
+import ch.hes.foreignlanguageschool.Student;
 import ch.hes.foreignlanguageschool.DB.DBDay;
 import ch.hes.foreignlanguageschool.DB.DBLecture;
 import ch.hes.foreignlanguageschool.DB.DBStudent;

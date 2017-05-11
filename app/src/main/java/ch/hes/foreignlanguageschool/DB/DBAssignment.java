@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import ch.hes.foreignlanguageschool.DAO.Assignment;
+import ch.hes.foreignlanguageschool.Assignment;
 
 /**
  * Created by patrickclivaz on 11.04.17.

@@ -1,4 +1,4 @@
-package ch.hes.foreignlanguageschool.DAO;
+package ch.hes.foreignlanguageschool;
 
 import java.io.Serializable;
 import java.util.List;

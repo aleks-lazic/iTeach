@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import ch.hes.foreignlanguageschool.Activities.StudentActivity;
 import ch.hes.foreignlanguageschool.Activities.StudentEdit;
 import ch.hes.foreignlanguageschool.Adapters.CustomAdapterStudent;
-import ch.hes.foreignlanguageschool.DAO.Student;
+import ch.hes.foreignlanguageschool.Student;
 import ch.hes.foreignlanguageschool.DB.DBLecture;
 import ch.hes.foreignlanguageschool.DB.DBStudent;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;

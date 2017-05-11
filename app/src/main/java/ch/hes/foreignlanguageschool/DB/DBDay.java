@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
 
-import ch.hes.foreignlanguageschool.DAO.Day;
+import ch.hes.foreignlanguageschool.Day;
 
 /**
  * Created by patrickclivaz on 11.04.17.

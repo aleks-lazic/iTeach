@@ -19,7 +19,7 @@ import java.util.Date;
 import ch.hes.foreignlanguageschool.Activities.AssignmentActivity;
 import ch.hes.foreignlanguageschool.Activities.AssignmentEdit;
 import ch.hes.foreignlanguageschool.Adapters.CustomAdapterAssignment;
-import ch.hes.foreignlanguageschool.DAO.Assignment;
+import ch.hes.foreignlanguageschool.Assignment;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.R;

@@ -20,11 +20,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+//import ch.hes.foreignlanguageschool.
+
+
+import com.example.patrickclivaz.myapplication.backend.studentApi.model.Student;
 
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
-import ch.hes.foreignlanguageschool.DAO.Teacher;
+import ch.hes.foreignlanguageschool.StudentAsyncTask;
+import ch.hes.foreignlanguageschool.Teacher;
 import ch.hes.foreignlanguageschool.DB.DBDay;
 import ch.hes.foreignlanguageschool.DB.DBTeacher;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
@@ -78,6 +83,10 @@ public class NavigationActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         loadLastLanguage();
         setContentView(R.layout.activity_navigation);
+
+        testCloudInsert();
+        getCloudRetrieve();
+
         checkPermissions();
 
         databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
@@ -355,6 +364,27 @@ public class NavigationActivity extends AppCompatActivity
 
         TextView nav_mail = (TextView) hView.findViewById(R.id.mail);
         nav_mail.setText(currentTeacher.getMail());
+    }
+
+
+    private void testCloudInsert(){
+        Student student = new Student();
+        long id = 1;
+        student.setId(id);
+        student.setFirstName("Flav");
+        student.setLastName("Bonvin");
+        student.setAddress("caca");
+        student.setCountry("suisse");
+        student.setStartDate("25.10.2015");
+        student.setEndDate("30.10.2016");
+        student.setMail("flav.bonvin@gmail.com");
+        student.setImageName("hello");
+
+        new StudentAsyncTask(student).execute();
+    }
+
+    private void getCloudRetrieve(){
+        new StudentAsyncTask().execute();
     }
 
 

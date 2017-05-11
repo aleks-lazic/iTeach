@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import ch.hes.foreignlanguageschool.Activities.LectureActivity;
 import ch.hes.foreignlanguageschool.Activities.LectureEdit;
 import ch.hes.foreignlanguageschool.Adapters.CustomAdapterLecture;
-import ch.hes.foreignlanguageschool.DAO.Lecture;
+import ch.hes.foreignlanguageschool.Lecture;
 import ch.hes.foreignlanguageschool.DB.DBLecture;
 import ch.hes.foreignlanguageschool.DB.DBStudent;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;

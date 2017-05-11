@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import ch.hes.foreignlanguageschool.DAO.Lecture;
-import ch.hes.foreignlanguageschool.DAO.Student;
+import ch.hes.foreignlanguageschool.Lecture;
+import ch.hes.foreignlanguageschool.Student;
 
 /**
  * Created by patrickclivaz on 11.04.17.
