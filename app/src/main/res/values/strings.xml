@@ -185,6 +185,7 @@
     <string name="daySummary">Summary of the</string>
     <string name="EndDateStartDate">End date must be after Start date</string>
     <string name="conflict">Conflict with another lecture</string>
+    <string name="sync">Data synchronization</string>
 
 
 </resources>

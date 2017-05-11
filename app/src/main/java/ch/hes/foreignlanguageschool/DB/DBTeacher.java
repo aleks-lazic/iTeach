@@ -4,10 +4,15 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import ch.hes.foreignlanguageschool.Student;
+import ch.hes.foreignlanguageschool.StudentAsyncTask;
 import ch.hes.foreignlanguageschool.Teacher;
+import ch.hes.foreignlanguageschool.TeacherAsyncTask;
 
 /**
  * Created by Aleksandar on 06.04.2017.
@@ -158,6 +163,27 @@ public class DBTeacher {
 
         long nbRows = DatabaseUtils.queryNumEntries(sql, db.getTableTeacher());
         return nbRows;
+    }
+
+    public void syncTeachersToCloud() {
+
+        List<Teacher> teachers = getAllTeachers();
+
+        for (Teacher t : teachers
+                ) {
+            com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher teacher = new com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher();
+
+            teacher.setId((long) t.getId());
+            teacher.setFirstName(t.getFirstName());
+            teacher.setLastName(t.getLastName());
+            teacher.setMail(t.getMail());
+            teacher.setImageName(t.getImageName());
+
+            new TeacherAsyncTask(teacher).execute();
+
+        }
+
+        Log.e("Aleks", "All teachers into the cloud");
     }
 
 }

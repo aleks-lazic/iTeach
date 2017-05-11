@@ -16,13 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
+public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
     private static TeacherApi teacherApi = null;
     private static final String TAG = TeacherAsyncTask.class.getName();
     private Teacher teacher;
 
+    public TeacherAsyncTask() {
 
-    TeacherAsyncTask(Teacher teacher) {
+    }
+
+    public TeacherAsyncTask(Teacher teacher) {
         this.teacher = teacher;
     }
 

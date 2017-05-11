@@ -3,10 +3,18 @@ package ch.hes.foreignlanguageschool.DB;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.util.Log;
+
+import com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Teacher;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import ch.hes.foreignlanguageschool.Assignment;
+import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
 import ch.hes.foreignlanguageschool.Student;
+import ch.hes.foreignlanguageschool.StudentAsyncTask;
 
 /**
  * Created by patrickclivaz on 11.04.17.
@@ -228,5 +236,31 @@ public class DBStudent {
                 db.getKeyId() + " = ?",
                 new String[]{String.valueOf(idStudent)});
 
+    }
+
+    public void syncStudentsToCloud() {
+
+        List<Student> students = getAllStudents();
+
+        for (Student s : students
+                ) {
+            com.example.patrickclivaz.myapplication.backend.studentApi.model.Student student = new com.example.patrickclivaz.myapplication.backend.studentApi.model.Student();
+
+            student.setId((long) s.getId());
+            student.setFirstName(s.getFirstName());
+            student.setLastName(s.getLastName());
+            student.setAddress(s.getAddress());
+            student.setCountry(s.getCountry());
+            student.setMail(s.getMail());
+            student.setStartDate(s.getStartDate());
+            student.setEndDate(s.getEndDate());
+            student.setImageName(s.getImageName());
+
+
+            new StudentAsyncTask(student).execute();
+
+        }
+
+        Log.e("Aleks", "All students into the cloud");
     }
 }

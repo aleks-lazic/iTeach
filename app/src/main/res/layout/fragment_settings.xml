@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="@dimen/margin_top"
+    android:orientation="vertical"
     tools:context="ch.hes.foreignlanguageschool.Fragments.SettingsFragment">
 
     <Button
@@ -13,6 +14,17 @@
         android:backgroundTint="@android:color/transparent"
         android:gravity="left|center_vertical"
         android:text="@string/Settings"
+        android:textAllCaps="false"
+        android:textSize="@dimen/text_title" />
+
+
+    <Button
+        android:id="@+id/btnSync"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@android:color/transparent"
+        android:gravity="left|center_vertical"
+        android:text="@string/sync"
         android:textAllCaps="false"
         android:textSize="@dimen/text_title" />
 </LinearLayout>

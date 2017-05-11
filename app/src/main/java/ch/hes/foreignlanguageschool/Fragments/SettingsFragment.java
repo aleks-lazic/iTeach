@@ -14,9 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import java.security.Principal;
 import java.util.Locale;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.DB.DBAssignment;
+import ch.hes.foreignlanguageschool.DB.DBDay;
+import ch.hes.foreignlanguageschool.DB.DBLecture;
+import ch.hes.foreignlanguageschool.DB.DBStudent;
+import ch.hes.foreignlanguageschool.DB.DBTeacher;
+import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.R;
 
 public class SettingsFragment extends Fragment {
@@ -26,6 +33,15 @@ public class SettingsFragment extends Fragment {
     private String mParam2;
 
     private Button btnLanguage;
+    private Button btnSync;
+
+    private DatabaseHelper db;
+    private DBAssignment dbAssignment;
+    private DBDay dbDay;
+    private DBStudent dbStudent;
+    private DBTeacher dbTeacher;
+    private DBLecture dbLecture;
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -60,6 +76,16 @@ public class SettingsFragment extends Fragment {
 
         // Set a button and its listener
         btnLanguage = (Button) view.findViewById(R.id.btnLanguage);
+        btnSync = (Button) view.findViewById(R.id.btnSync);
+
+        //create database objects
+        db = DatabaseHelper.getInstance(getActivity().getApplicationContext());
+        dbAssignment = new DBAssignment(db);
+        dbStudent = new DBStudent(db);
+        dbTeacher = new DBTeacher(db);
+        dbDay = new DBDay(db);
+        dbLecture = new DBLecture(db);
+
         btnLanguage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +102,19 @@ public class SettingsFragment extends Fragment {
                     }
                 });
                 alertDialog.show();
+            }
+        });
+
+        btnSync.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //send data to google cloud
+                dbAssignment.syncAssignmentsToCloud();
+                dbStudent.syncStudentsToCloud();
+                dbTeacher.syncTeachersToCloud();
+                dbDay.syncDaysToCloud();
+
             }
         });
 
@@ -97,6 +136,7 @@ public class SettingsFragment extends Fragment {
 
     /**
      * Choose the desired language depending the selection of the user
+     *
      * @param view
      * @param position
      */
@@ -117,6 +157,7 @@ public class SettingsFragment extends Fragment {
 
     /**
      * Switch to French language
+     *
      * @param v
      */
     public void changeToFR(View v) {
@@ -138,6 +179,7 @@ public class SettingsFragment extends Fragment {
 
     /**
      * Switch to German Language
+     *
      * @param v
      */
     public void changeToGE(View v) {
@@ -158,6 +200,7 @@ public class SettingsFragment extends Fragment {
 
     /**
      * Switch to English language
+     *
      * @param v
      */
     public void changeToEN(View v) {

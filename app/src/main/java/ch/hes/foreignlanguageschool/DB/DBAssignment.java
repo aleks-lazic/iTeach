@@ -4,10 +4,15 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Teacher;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.hes.foreignlanguageschool.Assignment;
+import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
 
 /**
  * Created by patrickclivaz on 11.04.17.
@@ -23,6 +28,7 @@ public class DBAssignment {
 
     /**
      * Insert assignment's values in the DB
+     *
      * @param title
      * @param description
      * @param date
@@ -47,6 +53,7 @@ public class DBAssignment {
 
     /**
      * get all assignments for db
+     *
      * @return
      */
     public ArrayList<Assignment> getAllAssignments() {
@@ -87,6 +94,7 @@ public class DBAssignment {
 
     /**
      * get assignment by id
+     *
      * @param idAssignment
      * @return
      */
@@ -123,6 +131,7 @@ public class DBAssignment {
 
     /**
      * delete assignment by id
+     *
      * @param idAssignment
      */
     public void deleteAssignmentById(int idAssignment) {
@@ -137,6 +146,7 @@ public class DBAssignment {
 
     /**
      * update assignment by id
+     *
      * @param idAssignment
      * @param title
      * @param description
@@ -161,7 +171,6 @@ public class DBAssignment {
     }
 
     /**
-     *
      * @return
      */
     public long getNumberOfRowsInTableAssignment() {
@@ -173,5 +182,33 @@ public class DBAssignment {
 
         long nbRows = DatabaseUtils.queryNumEntries(sql, db.getTableLecture());
         return nbRows;
+    }
+
+    public void syncAssignmentsToCloud() {
+
+        List<Assignment> assignments = getAllAssignments();
+
+        for (Assignment a : assignments
+                ) {
+            com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment assignment = new com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment();
+
+            assignment.setId((long) a.getId());
+            assignment.setTitle(a.getTitle());
+            assignment.setDescription(a.getDescription());
+            Teacher teacher = new Teacher();
+            teacher.setId((long) a.getTeacher().getId());
+            teacher.setFirstName(a.getTeacher().getFirstName());
+            teacher.setLastName(a.getTeacher().getLastName());
+            teacher.setMail(a.getTeacher().getMail());
+            teacher.setImageName(a.getTeacher().getImageName());
+            assignment.setTeacher(teacher);
+            assignment.setImageName(a.getImageName());
+            assignment.setAddedToCalendar(a.isAddedToCalendar());
+
+            new AssignmentAsyncTask(assignment).execute();
+
+        }
+
+        Log.e("Aleks", "All assignments into the cloud");
     }
 }

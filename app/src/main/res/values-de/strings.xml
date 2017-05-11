@@ -74,4 +74,5 @@
     <string name="daySummary">Zusamenfassung der</string>
     <string name="EndDateStartDate">Enddatum muss nach Startdatum sein</string>
     <string name="conflict">Konflikt mit einem anderen Vortrag</string>
+    <string name="sync">Synchronisation der Daten</string>
 </resources>

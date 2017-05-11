@@ -4,10 +4,16 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ch.hes.foreignlanguageschool.Day;
+import ch.hes.foreignlanguageschool.DayAsyncTask;
+import ch.hes.foreignlanguageschool.Student;
+import ch.hes.foreignlanguageschool.StudentAsyncTask;
 
 /**
  * Created by patrickclivaz on 11.04.17.
@@ -110,5 +116,23 @@ public class DBDay {
 
         long nbRows = DatabaseUtils.queryNumEntries(sql, db.getTableDay());
         return nbRows;
+    }
+
+    public void syncDaysToCloud() {
+
+        List<Day> days = getAllDays();
+
+        for (Day d : days
+                ) {
+            com.example.patrickclivaz.myapplication.backend.dayApi.model.Day day = new com.example.patrickclivaz.myapplication.backend.dayApi.model.Day();
+
+            day.setId((long)d.getId());
+            day.setName(d.getName());
+
+            new DayAsyncTask(day).execute();
+
+        }
+
+        Log.e("Aleks", "All days into the cloud");
     }
 }

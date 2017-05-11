@@ -76,8 +76,7 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
 
         if (result != null) {
             for (Student s : result) {
-                Log.i(TAG, "Title : " + s.getFirstName());
-
+                Log.i(TAG, "Title : " + s.getFirstName() + "\n result size : " + result.size());
             }
         }
     }

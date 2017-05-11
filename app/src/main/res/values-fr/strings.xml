@@ -75,4 +75,5 @@
     <string name="daySummary">Résumé du</string>
     <string name="EndDateStartDate">La date de fin doit être après la date de début</string>
     <string name="conflict">Conflit avec un autre cours</string>
+    <string name="sync">Synchronisation des données</string>
 </resources>

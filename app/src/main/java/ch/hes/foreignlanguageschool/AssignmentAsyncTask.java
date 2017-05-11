@@ -16,12 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>> {
+public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>> {
     private static AssignmentApi assignmentApi = null;
     private static final String TAG = AssignmentAsyncTask.class.getName();
     private Assignment assignment;
 
-    AssignmentAsyncTask(Assignment assignment) {
+    public AssignmentAsyncTask(){
+
+    }
+
+    public AssignmentAsyncTask(Assignment assignment) {
         this.assignment = assignment;
     }
 

@@ -16,13 +16,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
+public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
     private static DayApi dayApi = null;
     private static final String TAG = DayAsyncTask.class.getName();
     private Day day;
 
+    public DayAsyncTask(){
 
-    DayAsyncTask(Day day) {
+    }
+
+    public DayAsyncTask(Day day) {
         this.day = day;
     }
 
