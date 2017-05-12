@@ -1,10 +1,12 @@
 package ch.hes.foreignlanguageschool.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -13,9 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.security.Principal;
 import java.util.Locale;
+import java.util.logging.Handler;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
@@ -25,6 +29,9 @@ import ch.hes.foreignlanguageschool.DB.DBStudent;
 import ch.hes.foreignlanguageschool.DB.DBTeacher;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.R;
+
+import static android.R.attr.progress;
+import static android.app.ProgressDialog.show;
 
 public class SettingsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -42,6 +49,7 @@ public class SettingsFragment extends Fragment {
     private DBTeacher dbTeacher;
     private DBLecture dbLecture;
 
+    private ProgressDialog progressDialog;
 
     private OnFragmentInteractionListener mListener;
 
@@ -109,12 +117,27 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                //send data to google cloud
-                dbAssignment.syncAssignmentsToCloud();
-                dbStudent.syncStudentsToCloud();
-                dbTeacher.syncTeachersToCloud();
-                dbDay.syncDaysToCloud();
-                dbLecture.syncLecturesToCloud();
+                progressDialog = ProgressDialog.show(getActivity(), "",
+                        getResources().getString(R.string.SyncProgress), false);
+
+                        //send data to google cloud
+                        dbAssignment.syncAssignmentsToCloud();
+                        dbStudent.syncStudentsToCloud();
+                        dbTeacher.syncTeachersToCloud();
+                        dbDay.syncDaysToCloud();
+                        dbLecture.syncLecturesToCloud();
+
+                //provisoire
+                new CountDownTimer(3000, 1000) {
+
+                    public void onTick(long millisUntilFinished) {
+                        // You don't need anything here
+                    }
+
+                    public void onFinish() {
+                        progressDialog.dismiss();
+                    }
+                }.start();
 
             }
         });
