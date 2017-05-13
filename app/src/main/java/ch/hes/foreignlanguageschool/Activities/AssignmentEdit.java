@@ -25,6 +25,8 @@ import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.R;
 
+import static ch.hes.foreignlanguageschool.Activities.SyncActivity.teacher;
+
 public class AssignmentEdit extends AppCompatActivity {
 
     private EditText txtViewTitle;
@@ -59,7 +61,7 @@ public class AssignmentEdit extends AppCompatActivity {
         checkBoxCalendar = (CheckBox) findViewById(R.id.checkBoxCalendar);
 
         txtViewDueDate.setText("");
-        txtViewCurrentTeacher.setText(NavigationActivity.teacher.toString());
+        txtViewCurrentTeacher.setText(teacher.toString());
 
 
         //create database objects
@@ -132,7 +134,7 @@ public class AssignmentEdit extends AppCompatActivity {
             String title = txtViewTitle.getText().toString();
             String description = txtViewDescription.getText().toString();
             String date = txtViewDueDate.getText().toString();
-            long idTeacher = NavigationActivity.teacher.getId();
+            long idTeacher = teacher.getId();
             int isChecked = 0;
             if (checkBoxCalendar.isChecked()) {
                 addToPhoneCalendar(title, description, date);

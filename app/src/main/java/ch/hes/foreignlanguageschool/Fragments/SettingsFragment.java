@@ -203,7 +203,7 @@ public class SettingsFragment extends Fragment {
         PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putString("LANGUAGE", "fr").commit();
 
         getActivity().finish();
-        Intent myIntent = new Intent(v.getContext(), SyncActivity.class);
+        Intent myIntent = new Intent(v.getContext(), NavigationActivity.class);
         myIntent.putExtra("tag", "Settings");
         startActivity(myIntent);
     }
@@ -224,7 +224,7 @@ public class SettingsFragment extends Fragment {
         PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putString("LANGUAGE", "de").commit();
 
         getActivity().finish();
-        Intent myIntent = new Intent(v.getContext(), SyncActivity.class);
+        Intent myIntent = new Intent(v.getContext(), NavigationActivity.class);
         myIntent.putExtra("tag", "Settings");
         startActivity(myIntent);
     }
@@ -245,7 +245,7 @@ public class SettingsFragment extends Fragment {
         PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putString("LANGUAGE", "en").commit();
 
         getActivity().finish();
-        Intent myIntent = new Intent(v.getContext(), SyncActivity.class);
+        Intent myIntent = new Intent(v.getContext(), NavigationActivity.class);
         myIntent.putExtra("tag", "Settings");
         startActivity(myIntent);
     }

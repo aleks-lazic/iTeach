@@ -16,9 +16,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBTeacher;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.R;
+
+import static ch.hes.foreignlanguageschool.Activities.SyncActivity.teacher;
 
 public class ProfileFragment extends Fragment {
 
@@ -74,13 +77,13 @@ public class ProfileFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         txtFirstName = (EditText) view.findViewById(R.id.teacher_firstname);
-        txtFirstName.setText(NavigationActivity.teacher.getFirstName());
+        txtFirstName.setText(teacher.getFirstName());
 
         txtLastName = (EditText) view.findViewById(R.id.teacher_lastname);
-        txtLastName.setText(NavigationActivity.teacher.getLastName());
+        txtLastName.setText(teacher.getLastName());
 
         txtMail = (EditText) view.findViewById(R.id.teacher_mail);
-        txtMail.setText(NavigationActivity.teacher.getMail());
+        txtMail.setText(teacher.getMail());
 
         setEditable(false);
 
@@ -129,8 +132,8 @@ public class ProfileFragment extends Fragment {
             String lastname = txtLastName.getText().toString();
             String mail = txtMail.getText().toString();
 
-            dbTeacher.updateTeacherById(NavigationActivity.teacher.getId(), fistname, lastname, mail);
-            NavigationActivity.teacher = dbTeacher.getTeacherById(1);
+            dbTeacher.updateTeacherById(SyncActivity.teacher.getId(), fistname, lastname, mail);
+            SyncActivity.teacher = dbTeacher.getTeacherById(1);
             NavigationActivity.setNavigationView();
 
             setEditable(false);

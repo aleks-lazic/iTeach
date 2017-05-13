@@ -44,6 +44,9 @@ public class SyncActivity extends AppCompatActivity {
     public static List<Day> lastDayResult = new ArrayList<Day>();
     public static List<Teacher> lastTeacherResult = new ArrayList<Teacher>();
 
+    //current teacher
+    public static ch.hes.foreignlanguageschool.Teacher teacher;
+
 
 
 
@@ -71,20 +74,13 @@ public class SyncActivity extends AppCompatActivity {
                 while(dbTeacher.getNumberOfRowsInTableTeacher() != 1){
                     Log.d("Aleks", " "+dbTeacher.getNumberOfRowsInTableTeacher());
 
-//                    //update the progress bar
-//                    mHandler.post(new Runnable() {
-//                        @Override
-//                        public void run() {
-//                            progressBar.setProgress(progression);
-//                        }
-//                    });
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-
+                teacher = dbTeacher.getTeacherById(1);
                 Intent myIntent = new Intent(getApplicationContext(), NavigationActivity.class);
                 startActivity(myIntent);
 

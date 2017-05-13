@@ -39,6 +39,7 @@ import ch.hes.foreignlanguageschool.DB.DBStudent;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.R;
 
+import static ch.hes.foreignlanguageschool.Activities.SyncActivity.teacher;
 import static ch.hes.foreignlanguageschool.R.id.spinnerDay;
 
 
@@ -93,7 +94,7 @@ public class LectureEdit extends AppCompatActivity {
 
         editTxtTimePickerTo.setText("");
         editTxtTimePickerFrom.setText("");
-        txtTeacherName.setText(NavigationActivity.teacher.toString());
+        txtTeacherName.setText(teacher.toString());
         daysOfWeek = getResources().getStringArray(R.array.DaysOfWeekUntilSaturday);
 
         //create database objects
@@ -223,7 +224,7 @@ public class LectureEdit extends AppCompatActivity {
             //insert everything in DB
             String title = txtTitle.getText().toString();
             String description = txtDescription.getText().toString();
-            long idTeacher = NavigationActivity.teacher.getId();
+            long idTeacher = teacher.getId();
             int idDay = day.getId();
             String timeFrom = editTxtTimePickerFrom.getText().toString();
             String timeTo = editTxtTimePickerTo.getText().toString();

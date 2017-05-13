@@ -44,6 +44,7 @@ import ch.hes.foreignlanguageschool.R;
 import ch.hes.foreignlanguageschool.TeacherAsyncTask;
 
 import static android.os.Build.VERSION_CODES.M;
+import static ch.hes.foreignlanguageschool.Activities.SyncActivity.teacher;
 
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -72,8 +73,6 @@ public class NavigationActivity extends AppCompatActivity
     //Database
     public static DatabaseHelper databaseHelper;
     private DBTeacher dbTeacher;
-    public static Teacher teacher;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,17 +81,6 @@ public class NavigationActivity extends AppCompatActivity
         setContentView(R.layout.activity_navigation);
 
         checkPermissions();
-
-
-
-//        //create the current teacher like if he was logged in
-//        dbTeacher = new DBTeacher(databaseHelper);
-
-//        if (dbTeacher.getNumberOfRowsInTableTeacher() == 0) {
-//            Log.d("Aleks", "Je dois rajouter teacher manuellement...");
-//            dbTeacher.insertValues("Predrag", "Ljubicic", "pedjo.ljubo@mail.srb");
-//        }
-
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -103,7 +91,6 @@ public class NavigationActivity extends AppCompatActivity
 
         databaseHelper = DatabaseHelper.getInstance(this);
         dbTeacher = new DBTeacher(databaseHelper);
-        teacher = dbTeacher.getTeacherById(1);
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         setNavigationView();
@@ -350,7 +337,7 @@ public class NavigationActivity extends AppCompatActivity
 
         View hView = navigationView.getHeaderView(0);
         TextView nav_user = (TextView) hView.findViewById(R.id.name);
-        nav_user.setText(teacher.toString());
+        nav_user.setText(SyncActivity.teacher.toString());
 
         TextView nav_mail = (TextView) hView.findViewById(R.id.mail);
         nav_mail.setText(teacher.getMail());
