@@ -77,6 +77,16 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
     @Override
     protected void onPostExecute(List<Assignment> result) {
 
+        if (SyncActivity.lastAssignmentResult.equals(result)) {
+            return;
+        }
+
+        SyncActivity.lastAssignmentResult = result;
+
+        if(assignment != null){
+            return;
+        }
+
 
         DBAssignment dbAssignment = new DBAssignment(SyncActivity.databaseHelper);
         dbAssignment.retrieveAssignments(result);
@@ -88,7 +98,5 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
 
             }
         }
-
-        SyncActivity.assignmentFlag = true;
     }
 }

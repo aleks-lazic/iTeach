@@ -9,16 +9,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
 import ch.hes.foreignlanguageschool.DB.DBTeacher;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.DayAsyncTask;
-import ch.hes.foreignlanguageschool.Lecture;
 import ch.hes.foreignlanguageschool.LectureAsyncTask;
 import ch.hes.foreignlanguageschool.R;
 import ch.hes.foreignlanguageschool.StudentAsyncTask;
 import ch.hes.foreignlanguageschool.TeacherAsyncTask;
 
+import com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment;
+import com.example.patrickclivaz.myapplication.backend.dayApi.model.Day;
+import com.example.patrickclivaz.myapplication.backend.lectureApi.model.Lecture;
+import com.example.patrickclivaz.myapplication.backend.studentApi.model.Student;
+import com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher;
 
 
 public class SyncActivity extends AppCompatActivity {
@@ -30,42 +37,47 @@ public class SyncActivity extends AppCompatActivity {
     private int progression = 0;
     private Handler mHandler = new Handler();
 
-    //boolean values for the asyncTask
-    public static boolean assignmentFlag = false;
-    public static boolean lectureFlag = false;
-    public static boolean teacherFlag = false;
-    public static boolean studentFlag = false;
-    public static boolean dayFlag = false;
+    //List for comparing
+    public static List<Lecture> lastLectureResult = new ArrayList<Lecture>();
+    public static List<Student> lastStudentResult = new ArrayList<Student>();
+    public static List<Assignment> lastAssignmentResult = new ArrayList<Assignment>();
+    public static List<Day> lastDayResult = new ArrayList<Day>();
+    public static List<Teacher> lastTeacherResult = new ArrayList<Teacher>();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sync);
 
+        //get the progress bar
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+        //get for DB
         databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
         dbTeacher = new DBTeacher(databaseHelper);
 
+        //delete current content on DB
         deleteDatabase(databaseHelper.getDatabaseName());
 
-        databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
-
+        //retrieve data from the cloud
         getCloudRetrieve();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
                 while(dbTeacher.getNumberOfRowsInTableTeacher() != 1){
-                    checkFlags();
                     Log.d("Aleks", " "+dbTeacher.getNumberOfRowsInTableTeacher());
 
-                    //update the progress bar
-                    mHandler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            progressBar.setProgress(progression);
-                        }
-                    });
+//                    //update the progress bar
+//                    mHandler.post(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            progressBar.setProgress(progression);
+//                        }
+//                    });
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -79,20 +91,6 @@ public class SyncActivity extends AppCompatActivity {
             }
         }).start();
 
-
-
-
-
-
-//        button.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent myIntent = new Intent(getApplicationContext(), NavigationActivity.class);
-//                startActivity(myIntent);
-//            }
-//        });
-
-
     }
 
     private void getCloudRetrieve() {
@@ -103,32 +101,6 @@ public class SyncActivity extends AppCompatActivity {
         new LectureAsyncTask().execute();
     }
 
-    private void checkFlags(){
 
-        if(assignmentFlag) {
-            progression += 20;
-            assignmentFlag = false;
-        }
 
-        if(studentFlag) {
-            progression += 20;
-            studentFlag = false;
-        }
-
-        if(dayFlag) {
-            progression += 20;
-            dayFlag = false;
-        }
-
-        if(teacherFlag) {
-            progression += 20;
-            teacherFlag = false;
-        }
-
-        if(lectureFlag) {
-            progression += 20;
-            lectureFlag = false;
-        }
-
-    }
 }

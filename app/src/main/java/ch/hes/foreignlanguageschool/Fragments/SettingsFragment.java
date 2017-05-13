@@ -22,13 +22,19 @@ import java.util.Locale;
 import java.util.logging.Handler;
 
 import ch.hes.foreignlanguageschool.Activities.NavigationActivity;
+import ch.hes.foreignlanguageschool.Activities.SyncActivity;
+import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBDay;
 import ch.hes.foreignlanguageschool.DB.DBLecture;
 import ch.hes.foreignlanguageschool.DB.DBStudent;
 import ch.hes.foreignlanguageschool.DB.DBTeacher;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
+import ch.hes.foreignlanguageschool.DayAsyncTask;
+import ch.hes.foreignlanguageschool.LectureAsyncTask;
 import ch.hes.foreignlanguageschool.R;
+import ch.hes.foreignlanguageschool.StudentAsyncTask;
+import ch.hes.foreignlanguageschool.TeacherAsyncTask;
 
 import static android.R.attr.progress;
 import static android.app.ProgressDialog.show;
@@ -120,12 +126,13 @@ public class SettingsFragment extends Fragment {
                 progressDialog = ProgressDialog.show(getActivity(), "",
                         getResources().getString(R.string.SyncProgress), false);
 
-                        //send data to google cloud
-                        dbAssignment.syncAssignmentsToCloud();
-                        dbStudent.syncStudentsToCloud();
-                        dbTeacher.syncTeachersToCloud();
-                        dbDay.syncDaysToCloud();
-                        dbLecture.syncLecturesToCloud();
+                //send data to google cloud
+                dbAssignment.syncAssignmentsToCloud();
+                dbStudent.syncStudentsToCloud();
+                dbTeacher.syncTeachersToCloud();
+                dbDay.syncDaysToCloud();
+                dbLecture.syncLecturesToCloud();
+
 
                 //provisoire
                 new CountDownTimer(3000, 1000) {
@@ -196,7 +203,7 @@ public class SettingsFragment extends Fragment {
         PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putString("LANGUAGE", "fr").commit();
 
         getActivity().finish();
-        Intent myIntent = new Intent(v.getContext(), NavigationActivity.class);
+        Intent myIntent = new Intent(v.getContext(), SyncActivity.class);
         myIntent.putExtra("tag", "Settings");
         startActivity(myIntent);
     }
@@ -217,7 +224,7 @@ public class SettingsFragment extends Fragment {
         PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putString("LANGUAGE", "de").commit();
 
         getActivity().finish();
-        Intent myIntent = new Intent(v.getContext(), NavigationActivity.class);
+        Intent myIntent = new Intent(v.getContext(), SyncActivity.class);
         myIntent.putExtra("tag", "Settings");
         startActivity(myIntent);
     }
@@ -238,7 +245,7 @@ public class SettingsFragment extends Fragment {
         PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext()).edit().putString("LANGUAGE", "en").commit();
 
         getActivity().finish();
-        Intent myIntent = new Intent(v.getContext(), NavigationActivity.class);
+        Intent myIntent = new Intent(v.getContext(), SyncActivity.class);
         myIntent.putExtra("tag", "Settings");
         startActivity(myIntent);
     }

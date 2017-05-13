@@ -77,6 +77,17 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
     @Override
     protected void onPostExecute(List<Day> result) {
 
+        if (SyncActivity.lastDayResult.equals(result)) {
+            return;
+        }
+
+        SyncActivity.lastDayResult = result;
+
+        if(day != null){
+            return;
+        }
+
+
         DBDay dbDay = new DBDay(SyncActivity.databaseHelper);
         dbDay.retrieveDays(result);
 
@@ -87,8 +98,5 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
 
             }
         }
-
-        SyncActivity.dayFlag = true;
-
     }
 }

@@ -79,6 +79,17 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
     @Override
     protected void onPostExecute(List<Student> result) {
 
+        if (SyncActivity.lastStudentResult.equals(result)) {
+            return;
+        }
+
+        SyncActivity.lastStudentResult = result;
+
+        if(student != null){
+            return;
+        }
+
+
         DBStudent dbStudent = new DBStudent(SyncActivity.databaseHelper);
         dbStudent.retrieveStudents(result);
 
@@ -87,7 +98,5 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
                 Log.i(TAG, "Title : " + s.getFirstName() + "\n result size : " + result.size());
             }
         }
-
-        SyncActivity.studentFlag = true;
     }
 }

@@ -76,19 +76,26 @@ public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
     //of this method
     @Override
     protected void onPostExecute(List<Teacher> result) {
+
+        if (SyncActivity.lastTeacherResult.equals(result)) {
+            return;
+        }
+
+        SyncActivity.lastTeacherResult = result;
+
+        if(teacher != null){
+            return;
+        }
+
+
         DBTeacher dbTeacher = new DBTeacher(SyncActivity.databaseHelper);
         dbTeacher.retrieveTeacher(result);
-
 
         if (result != null) {
             for (Teacher t : result) {
                 Log.e(TAG, "Teacher name : " + t.getFirstName() + "Teacher id : " + t.getId());
             }
         }
-
-
-        SyncActivity.teacherFlag = true;
-
 
     }
 }

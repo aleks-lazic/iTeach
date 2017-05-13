@@ -754,6 +754,8 @@ public class DBLecture {
 
         }
 
+
+
         Log.e("Aleks", "All letures into the cloud");
     }
 
@@ -778,6 +780,7 @@ public class DBLecture {
             }
 
             //insert day values
+            Log.d("Aleks", "j'ajoute le jours aux cours : " + Integer.parseInt(l.getDay().getId()+""));
             addDayAndHoursToLecture(Integer.parseInt(l.getId()+""),Integer.parseInt(l.getDay().getId()+""),l.getStartTime(), l.getEndTime());
         }
     }

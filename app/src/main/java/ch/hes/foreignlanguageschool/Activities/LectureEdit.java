@@ -218,7 +218,7 @@ public class LectureEdit extends AppCompatActivity {
             //get the day from spinner
             int position = spinnerDays.getSelectedItemPosition() + 1;
             Log.d("Aleks", ""+position);
-            day = (Day) dbDay.getDayById(position);
+            day = dbDay.getDayById(position);
 
             //insert everything in DB
             String title = txtTitle.getText().toString();
@@ -233,6 +233,8 @@ public class LectureEdit extends AppCompatActivity {
             }
 
             if (lecture != null) {
+
+                Log.d("ALEKS", "OLD ID DAY : " + lecture.getIdDay() + " new id day : " + idDay);
                 dbLecture.updateLectureNameAndDescription(lecture.getId(), title, description);
                 dbLecture.updateDayTime(lecture.getId(), lecture.getIdDay(), idDay, timeFrom, timeTo);
                 dbLecture.deleteLectureFromLectureStudent(lecture.getId());

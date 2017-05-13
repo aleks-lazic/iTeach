@@ -78,19 +78,28 @@ public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
     @Override
     protected void onPostExecute(List<Lecture> result) {
 
-        DBLecture dbLecture = new DBLecture(SyncActivity.databaseHelper);
-        dbLecture.retrieveLecture(result);
-
-        if (result != null) {
-            for (Lecture l : result) {
-                Log.i(TAG, "Title : " + l.getName());
-
-                Log.i(TAG, "Teacher name : " + l.getTeacher().getFirstName());
-
-            }
+        if (SyncActivity.lastLectureResult.equals(result)) {
+            return;
         }
 
-        SyncActivity.lectureFlag = true;
+        SyncActivity.lastLectureResult = result;
 
+        if(lecture != null){
+            return;
+        }
+
+        if (result != null) {
+            DBLecture dbLecture = new DBLecture(SyncActivity.databaseHelper);
+            dbLecture.retrieveLecture(result);
+
+            if (result != null) {
+                for (Lecture l : result) {
+                    Log.i(TAG, "Title : " + l.getName());
+
+                    Log.i(TAG, "Teacher name : " + l.getTeacher().getFirstName());
+
+                }
+            }
+        }
     }
 }
