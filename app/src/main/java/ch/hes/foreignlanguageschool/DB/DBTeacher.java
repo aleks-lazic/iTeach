@@ -47,7 +47,7 @@ public class DBTeacher {
 
         sql.insert(db.getTableTeacher(), null, values);
 
-        sql.close();
+
     }
 
     /**
@@ -81,7 +81,7 @@ public class DBTeacher {
         teacher.setMail(cursor.getString(3));
         teacher.setImageName(cursor.getString(4));
 
-        sql.close();
+
 
         // return teacher
         return teacher;
@@ -141,7 +141,7 @@ public class DBTeacher {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return teachers list

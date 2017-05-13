@@ -39,7 +39,7 @@ public class DBDay {
         values.put(db.getDAY_NAME(), name);
 
         sql.insert(db.getTableDay(), null, values);
-        sql.close();
+
     }
 
     /**
@@ -67,7 +67,7 @@ public class DBDay {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return days list
@@ -99,7 +99,7 @@ public class DBDay {
 
 
 
-        sql.close();
+
 
         // return day
         return day;

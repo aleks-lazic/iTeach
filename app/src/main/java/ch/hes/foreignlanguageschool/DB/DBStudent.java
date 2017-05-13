@@ -54,7 +54,7 @@ public class DBStudent {
         values.put(db.getIMAGE_NAME(), "student_icon");
 
         sql.insert(db.getTableStudent(), null, values);
-        sql.close();
+
     }
 
     /**
@@ -85,7 +85,7 @@ public class DBStudent {
         student.setEndDate(cursor.getString(7));
         student.setImageName(cursor.getString(8));
 
-        sql.close();
+
 
 
         // return teacher
@@ -117,7 +117,7 @@ public class DBStudent {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return teacher
@@ -159,7 +159,7 @@ public class DBStudent {
         }
 
 
-        sql.close();
+
 
         // return students list
         return studentsList;
@@ -185,7 +185,7 @@ public class DBStudent {
 
         sql.delete(db.getTableStudent(), db.getKeyId() + " = ?",
                 new String[]{String.valueOf(idStudent)});
-        sql.close();
+
 
     }
 
@@ -201,7 +201,7 @@ public class DBStudent {
 
         sql.delete(db.getTableLecturestudent(), db.getLECTURESTUDENT_FKSTUDENT() + " = ?",
                 new String[]{String.valueOf(idStudent)});
-        sql.close();
+
     }
 
     /**

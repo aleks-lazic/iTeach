@@ -52,7 +52,7 @@ public class DBLecture {
         values.put(db.getLECTURE_FKTEACHER(), idTeacher);
 
         sql.insert(db.getTableLecture(), null, values);
-        sql.close();
+
     }
 
     /**
@@ -89,7 +89,7 @@ public class DBLecture {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return lectures list
@@ -126,7 +126,7 @@ public class DBLecture {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return lectures list
@@ -165,7 +165,7 @@ public class DBLecture {
         lecture.setImageName(cursor.getString((3)));
 
 
-        sql.close();
+
 
 
         // return lectures
@@ -215,7 +215,7 @@ public class DBLecture {
         lecture.setEndTime(cursor.getString(7));
 
 
-        sql.close();
+
 
 
         // return lectures list
@@ -269,7 +269,7 @@ public class DBLecture {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return lectures list
@@ -321,7 +321,7 @@ public class DBLecture {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return lectures list
@@ -344,7 +344,7 @@ public class DBLecture {
 
         sql.insert(db.getTableLecturestudent(), null, values);
 
-        sql.close();
+
 
     }
 
@@ -381,7 +381,7 @@ public class DBLecture {
         values.put(db.getLECTUREDATE_ENDTIME(), endTime);
 
         sql.insert(db.getTableLecturedate(), null, values);
-        sql.close();
+
     }
 
     /**
@@ -446,7 +446,7 @@ public class DBLecture {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return lectures list
@@ -471,7 +471,7 @@ public class DBLecture {
             id = cursor.getInt(0);
         }
 
-        sql.close();
+
 
         return id;
     }
@@ -558,7 +558,7 @@ public class DBLecture {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return lectures list
@@ -588,7 +588,7 @@ public class DBLecture {
 
         sql.delete(db.getTableLecture(), db.getKeyId() + " = ?",
                 new String[]{String.valueOf(idLecture)});
-        sql.close();
+
 
     }
 
@@ -602,7 +602,7 @@ public class DBLecture {
 
         sql.delete(db.getTableLecturestudent(), db.getLECTURESTUDENT_FKLECTURE() + " = ?",
                 new String[]{String.valueOf(idLecture)});
-        sql.close();
+
 
 
     }
@@ -617,7 +617,7 @@ public class DBLecture {
 
         sql.delete(db.getTableLecturedate(), db.getLECTUREDATE_FKLECTURE() + " = ?",
                 new String[]{String.valueOf(idLecture)});
-        sql.close();
+
     }
 
 

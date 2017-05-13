@@ -48,7 +48,7 @@ public class DBAssignment {
         values.put(db.getASSIGNMENT_ADDTOCALENDAR(), addedToCalendar);
 
         sql.insert(db.getTableAssignement(), null, values);
-        sql.close();
+
     }
 
     /**
@@ -85,7 +85,7 @@ public class DBAssignment {
             } while (cursor.moveToNext());
         }
 
-        sql.close();
+
 
 
         // return assignments list
@@ -124,7 +124,7 @@ public class DBAssignment {
         assignment.setAddedToCalendar(flag);
 
 
-        sql.close();
+
 
         return assignment;
     }
@@ -140,7 +140,7 @@ public class DBAssignment {
 
         sql.delete(db.getTableAssignement(), db.getKeyId() + " = ?",
                 new String[]{String.valueOf(idAssignment)});
-        sql.close();
+
 
     }
 
