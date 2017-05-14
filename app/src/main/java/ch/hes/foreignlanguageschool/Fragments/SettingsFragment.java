@@ -134,11 +134,11 @@ public class SettingsFragment extends Fragment {
                 dbLecture.syncLecturesToCloud();
 
 
-                //provisoire
+                //set a counter for 3 seconds when sync
                 new CountDownTimer(3000, 1000) {
 
                     public void onTick(long millisUntilFinished) {
-                        // You don't need anything here
+
                     }
 
                     public void onFinish() {

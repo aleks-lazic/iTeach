@@ -27,6 +27,7 @@ import java.util.Locale;
 
 import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
 import ch.hes.foreignlanguageschool.DayAsyncTask;
+import ch.hes.foreignlanguageschool.Fragments.AboutFragment;
 import ch.hes.foreignlanguageschool.LectureAsyncTask;
 import ch.hes.foreignlanguageschool.StudentAsyncTask;
 import ch.hes.foreignlanguageschool.Teacher;
@@ -59,6 +60,7 @@ public class NavigationActivity extends AppCompatActivity
     public final String TAG_STUDENTS = "Students";
     public final String TAG_PROFILE = "Profile";
     public final String TAG_SETTINGS = "Settings";
+    public final String TAG_ABOUT = "About";
     public String CURRENT_TAG = "";
 
     //index to identify current nav menu item
@@ -168,6 +170,9 @@ public class NavigationActivity extends AppCompatActivity
         } else if (id == R.id.nav_settings) {
             CURRENT_TAG = TAG_SETTINGS;
             navItemIndex = 6;
+        } else if (id == R.id.nav_about) {
+            CURRENT_TAG = TAG_ABOUT;
+            navItemIndex = 7;
         }
         //Checking if the item in in checked state or not, if not make it checked
         if (menuItem.isChecked()) {
@@ -258,13 +263,17 @@ public class NavigationActivity extends AppCompatActivity
                 StudentsFragment studentsFragment = new StudentsFragment();
                 return studentsFragment;
             case 5:
-//                // profile
+                // profile
                 ProfileFragment profileFragment = new ProfileFragment();
                 return profileFragment;
             case 6:
                 // settings
                 SettingsFragment settingsFragment = new SettingsFragment();
                 return settingsFragment;
+            case 7:
+                // about
+                AboutFragment aboutFragment = new AboutFragment();
+                return aboutFragment;
             default:
                 return new TodayFragment();
         }

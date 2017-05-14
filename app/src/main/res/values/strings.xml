@@ -25,6 +25,7 @@
         <item>Students</item>
         <item>Profile</item>
         <item>Settings</item>
+        <item>About</item>
     </string-array>
     <string name="title_activity_lectures" translatable="false">LecturesActivity</string>
 
@@ -187,6 +188,10 @@
     <string name="conflict">Conflict with another lecture</string>
     <string name="sync">Data synchronization</string>
     <string name="SyncProgress">Sync in progress</string>
+    <string name="AboutText">This application was developed in the context of 644-1 Mobile and Cloud Computing module.</string>
+    <string name="About">About</string>
+    <string name="AboutText1">The purpose of this course is to introduce us to the Cloud and mobile computing with a practical focus on Google Cloud and Android programming.</string>
+    <string name="AboutText2">The Subject that we chose is a Foreign Language School application, on a teacher side, that is supposed to help him to manage all his stuff related to the school.</string>
 
 
 </resources>

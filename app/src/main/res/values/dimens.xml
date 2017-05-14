@@ -12,4 +12,5 @@
     <dimen name="margin_child">10dp</dimen>
     <dimen name="margin_left">50dp</dimen>
     <dimen name="margin_right">25dp</dimen>
+    <dimen name="about">100dp</dimen>
 </resources>

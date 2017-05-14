@@ -47,6 +47,7 @@
         <item>Studenten</item>
         <item>Profile</item>
         <item>Einstellungen</item>
+        <item>Über</item>
     </string-array>
     <string name="DayTitle">Tag</string>
     <string name="titleDate">Datum</string>
@@ -76,4 +77,8 @@
     <string name="conflict">Konflikt mit einem anderen Vortrag</string>
     <string name="sync">Synchronisation der Daten</string>
     <string name="SyncProgress">Synchronisation läuft</string>
+    <string name="AboutText">Diese Anwendung wurde im Rahmen des 644-1 Mobile and Cloud Computing Moduls entwickelt.</string>
+    <string name="About">Über</string>
+    <string name="AboutText1">Der Zweck dieses Kurses ist es, uns die Cloud und das mobile Computing mit einem praktischen Fokus auf Google Cloud und Android Programmierung vorzustellen.</string>
+    <string name="AboutText2">Das Thema, das wir gewählt haben, ist eine Fremdsprachenschule, auf einer Lehrerseite, die ihm helfen soll, alle seine Sachen im Zusammenhang mit der Schule zu bewältigen.</string>
 </resources>
