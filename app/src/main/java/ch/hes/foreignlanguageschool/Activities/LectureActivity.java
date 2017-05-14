@@ -140,7 +140,7 @@ public class LectureActivity extends AppCompatActivity {
 
         if (id == R.id.action_delete) {
             dbLecture.deleteLecture(lecture.getId());
-            dbLecture.deleteLectureInCloud(lecture);
+//            dbLecture.deleteLectureInCloud(lecture);
             finish();
             Toast toast = Toast.makeText(this, lecture.toString() + " " + getResources().getString(R.string.Lecture) + " " + getResources().getString(R.string.DeletedSuccess), Toast.LENGTH_SHORT);
             toast.show();

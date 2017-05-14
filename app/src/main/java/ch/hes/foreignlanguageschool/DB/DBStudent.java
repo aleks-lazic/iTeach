@@ -13,8 +13,11 @@ import java.util.List;
 
 import ch.hes.foreignlanguageschool.Assignment;
 import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
+import ch.hes.foreignlanguageschool.LectureAsyncTask;
 import ch.hes.foreignlanguageschool.Student;
 import ch.hes.foreignlanguageschool.StudentAsyncTask;
+
+import static android.R.attr.x;
 
 /**
  * Created by patrickclivaz on 11.04.17.
@@ -65,7 +68,7 @@ public class DBStudent {
             cursor.moveToFirst();
         }
 
-        student.setId(Integer.parseInt(cursor.getString(0)));
+        student.setId(cursor.getInt(0));
         student.setFirstName(cursor.getString(1));
         student.setLastName(cursor.getString(2));
         student.setAddress(cursor.getString(3));
@@ -297,9 +300,7 @@ public class DBStudent {
         student.setEndDate(s.getEndDate());
         student.setImageName(s.getImageName());
 
-
         new StudentAsyncTask(student, true, student.getId()).execute();
-
     }
 
     public void retrieveStudents(List<com.example.patrickclivaz.myapplication.backend.studentApi.model.Student> students) {

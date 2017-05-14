@@ -22,6 +22,7 @@ import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBLecture;
 
+import static android.R.attr.id;
 import static ch.hes.foreignlanguageschool.R.string.delete;
 
 
