@@ -80,13 +80,9 @@ public class LectureEndpoint {
         // Objectify ID generator, e.g. long or String, then you should generate the unique ID yourself prior to saving.
         //
         // If your client provides the ID then you should probably use PUT instead.
+
         //save the teacher in the database
         ofy().save().entity(lecture.getTeacher()).now();
-
-        //save the students in the db
-        for (Student student : lecture.getStudentsList()) {
-            ofy().save().entity(student).now();
-        }
 
         ofy().save().entity(lecture).now();
         logger.info("Created Lecture with ID: " + lecture.getId());
@@ -110,13 +106,9 @@ public class LectureEndpoint {
     public Lecture update(@Named("id") long id, Lecture lecture) throws NotFoundException {
         // TODO: You should validate your ID parameter against your resource's ID here.
         checkExists(id);
+
         //save the teacher in the database
         ofy().save().entity(lecture.getTeacher()).now();
-
-        //save the students in the db
-        for (Student student : lecture.getStudentsList()) {
-            ofy().save().entity(student).now();
-        }
 
         ofy().save().entity(lecture).now();
         logger.info("Updated Lecture: " + lecture);

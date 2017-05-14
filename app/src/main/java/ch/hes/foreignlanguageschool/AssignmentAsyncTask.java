@@ -27,14 +27,16 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
     private static final String TAG = AssignmentAsyncTask.class.getName();
     private Assignment assignment;
     private boolean delete;
+    private long idToDelete;
 
     public AssignmentAsyncTask(){
 
     }
 
-    public AssignmentAsyncTask(Assignment assignment, boolean delete){
+    public AssignmentAsyncTask(Assignment assignment, boolean delete, long idToDelete){
         this.assignment = assignment;
         this.delete = delete;
+        this.idToDelete = idToDelete;
     }
 
     public AssignmentAsyncTask(Assignment assignment) {
@@ -89,8 +91,8 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
             try {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
-                Log.e("DELETE", "JE SUPPRIME L'ASSIGNMENT MON GARS");
-                assignmentApi.remove(assignment.getId()).execute();
+                Log.e("DELETE", "JE SUPPRIME L'ASSIGNMENT MON GARS  + ID : " + idToDelete);
+                assignmentApi.remove(idToDelete).execute();
             } catch (IOException e) {
                 e.printStackTrace();
             }

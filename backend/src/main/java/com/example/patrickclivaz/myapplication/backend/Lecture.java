@@ -23,7 +23,7 @@ public class Lecture implements Serializable {
     private String name;
     private String description;
     private Teacher teacher = new Teacher();
-    private List<Student> studentsList = new ArrayList<Student>();
+    private List<Integer> studentsList = new ArrayList<Integer>();
     private String imageName;
     private int idDay;
     private String startTime;
@@ -66,11 +66,11 @@ public class Lecture implements Serializable {
         this.teacher = teacher;
     }
 
-    public List<Student> getStudentsList() {
+    public List<Integer> getStudentsList() {
         return studentsList;
     }
 
-    public void setStudentsList(ArrayList<Student> studentsList) {
+    public void setStudentsList(ArrayList<Integer> studentsList) {
         this.studentsList = studentsList;
     }
 

@@ -19,6 +19,8 @@ public class Student implements Serializable {
     private String endDate;
     private ArrayList<Lecture> lecturesList;
     private String imageName;
+    private int idGoogleAppEngine;
+
 
     public Student(int id, String firstName, String lastName, String address, String country, String mail, String startDate, String endDate) {
         this.id = id;
@@ -132,5 +134,13 @@ public class Student implements Serializable {
         }
 
         return false;
+    }
+
+    public int getIdGoogleAppEngine() {
+        return idGoogleAppEngine;
+    }
+
+    public void setIdGoogleAppEngine(int idGoogleAppEngine) {
+        this.idGoogleAppEngine = idGoogleAppEngine;
     }
 }

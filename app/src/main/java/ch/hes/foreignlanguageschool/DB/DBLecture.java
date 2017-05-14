@@ -698,7 +698,7 @@ public class DBLecture {
                 students.add(student);
             }
 
-            lecture.setStudentsList(students);
+//            lecture.setStudentsList(students);
 
             new LectureAsyncTask(lecture).execute();
 
@@ -750,7 +750,7 @@ public class DBLecture {
             students.add(student);
         }
 
-        lecture.setStudentsList(students);
+//        lecture.setStudentsList(students);
 
         new LectureAsyncTask(lecture).execute();
     }
@@ -813,10 +813,10 @@ public class DBLecture {
             insertValues(l.getName(), l.getDescription(), (Integer.parseInt(l.getTeacher().getId()+"")));
 
             //insert the student
-            for (com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student s : l.getStudentsList()
-                 ) {
-                addStudentToLecture(Integer.parseInt(s.getId()+""),Integer.parseInt(l.getId()+""));
-            }
+//            for (com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student s : l.getStudentsList()
+//                 ) {
+//                addStudentToLecture(Integer.parseInt(s.getId()+""),Integer.parseInt(l.getId()+""));
+//            }
 
             addDayAndHoursToLecture(Integer.parseInt(l.getId()+""), l.getIdDay(),l.getStartTime(), l.getEndTime());
         }

@@ -53,6 +53,34 @@ public class DBAssignment {
 
     }
 
+
+    /**
+     * Insert assignment's values in the DB
+     *
+     * @param title
+     * @param description
+     * @param date
+     * @param idTeacher
+     * @param addedToCalendar
+     */
+    public void insertValues(String title, String description, String date, long idTeacher, int addedToCalendar, long idCloud) {
+
+        SQLiteDatabase sql = db.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(db.getASSIGNMENT_TITLE(), title);
+        values.put(db.getASSIGNMENT_DESCRIPTION(), description);
+        values.put(db.getASSIGNMENT_DATE(), date);
+        values.put(db.getIMAGE_NAME(), "assignment_icon");
+        values.put(db.getASSIGNMENT_FKTEACHER(), idTeacher);
+        values.put(db.getASSIGNMENT_ADDTOCALENDAR(), addedToCalendar);
+        values.put(db.getCLOUD_ID(),idCloud);
+
+
+        sql.insert(db.getTableAssignement(), null, values);
+
+    }
+
     /**
      * get all assignments for db
      *
@@ -81,6 +109,7 @@ public class DBAssignment {
                 assignment.setTeacher(teacher.getTeacherById(Integer.parseInt(cursor.getString(5))));
                 boolean flag = (Integer.parseInt(cursor.getString(6)) > 0);
                 assignment.setAddedToCalendar(flag);
+                assignment.setIdGoogleAppEngine(cursor.getLong(7));
 
                 // Adding assignment to list
                 assignmentsList.add(assignment);
@@ -127,9 +156,7 @@ public class DBAssignment {
         assignment.setTeacher(dbTeacher.getTeacherById(Integer.parseInt(cursor.getString(5))));
         boolean flag = (Integer.parseInt(cursor.getString(6)) > 0);
         assignment.setAddedToCalendar(flag);
-
-
-
+        assignment.setIdGoogleAppEngine(cursor.getLong(7));
 
         return assignment;
     }
@@ -257,7 +284,7 @@ public class DBAssignment {
 
     }
 
-    public void deleteAssignmentInCloud(Assignment a){
+    public void deleteAssignmentInCloud(Assignment a, long idToDelete){
         com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment assignment = new com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment();
 
         assignment.setId((long) a.getId());
@@ -274,7 +301,7 @@ public class DBAssignment {
         assignment.setImageName(a.getImageName());
         assignment.setAddedToCalendar(a.isAddedToCalendar());
 
-        new AssignmentAsyncTask(assignment, true).execute();
+        new AssignmentAsyncTask(assignment, true, idToDelete).execute();
 
     }
 
@@ -282,11 +309,12 @@ public class DBAssignment {
 
         SQLiteDatabase sql = db.getReadableDatabase();
 
+
         for (com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment a : assignments
                 ) {
 
             int flag = a.getAddedToCalendar() ? 1 : 0;
-            insertValues(a.getTitle(), a.getDescription(), a.getDate(), Integer.parseInt(a.getTeacher().getId()+""), flag);
+            insertValues(a.getTitle(), a.getDescription(), a.getDate(), Integer.parseInt(a.getTeacher().getId()+""), flag, a.getId());
         }
 
 
