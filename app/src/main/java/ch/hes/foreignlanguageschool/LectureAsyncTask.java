@@ -2,6 +2,7 @@ package ch.hes.foreignlanguageschool;
 
 
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
 
 
@@ -21,15 +22,24 @@ import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBLecture;
 
+import static ch.hes.foreignlanguageschool.R.string.delete;
+
 
 public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
     private static LectureApi lectureApi = null;
     private static final String TAG = LectureAsyncTask.class.getName();
     private Lecture lecture;
+    private boolean delete;
 
     public LectureAsyncTask() {
 
     }
+
+    public LectureAsyncTask(Lecture lecture, boolean delete) {
+        this.lecture = lecture;
+        this.delete = delete;
+    }
+
 
     public LectureAsyncTask(Lecture lecture) {
         this.lecture = lecture;
@@ -78,17 +88,30 @@ public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
     @Override
     protected void onPostExecute(List<Lecture> result) {
 
-        if (SyncActivity.lastLectureResult.equals(result)) {
-            return;
-        }
+        if (delete) {
+            try {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                lectureApi.remove(lecture.getId()).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-        SyncActivity.lastLectureResult = result;
-
-        if(lecture != null){
             return;
         }
 
         if (result != null) {
+
+            if (SyncActivity.lastLectureResult.equals(result)) {
+                return;
+            }
+
+            SyncActivity.lastLectureResult = result;
+
+            if (lecture != null) {
+                return;
+            }
+
             DBLecture dbLecture = new DBLecture(SyncActivity.databaseHelper);
             dbLecture.retrieveLecture(result);
 

@@ -134,6 +134,7 @@ public class ProfileFragment extends Fragment {
 
             dbTeacher.updateTeacherById(SyncActivity.teacher.getId(), fistname, lastname, mail);
             SyncActivity.teacher = dbTeacher.getTeacherById(1);
+            dbTeacher.syncTeacherToCloud(teacher);
             NavigationActivity.setNavigationView();
 
             setEditable(false);

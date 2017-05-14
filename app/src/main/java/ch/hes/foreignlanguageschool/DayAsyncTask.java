@@ -26,7 +26,7 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
     private static final String TAG = DayAsyncTask.class.getName();
     private Day day;
 
-    public DayAsyncTask(){
+    public DayAsyncTask() {
 
     }
 
@@ -77,22 +77,23 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
     @Override
     protected void onPostExecute(List<Day> result) {
 
-        if (SyncActivity.lastDayResult.equals(result)) {
-            return;
-        }
-
-        SyncActivity.lastDayResult = result;
-
-        if(day != null){
-            return;
-        }
-
-
-        DBDay dbDay = new DBDay(SyncActivity.databaseHelper);
-        dbDay.retrieveDays(result);
 
         if (result != null) {
-            for (Day day: result) {
+
+            if (SyncActivity.lastDayResult.equals(result)) {
+                return;
+            }
+
+            SyncActivity.lastDayResult = result;
+
+            if (day != null) {
+                return;
+            }
+
+            DBDay dbDay = new DBDay(SyncActivity.databaseHelper);
+            dbDay.retrieveDays(result);
+
+            for (Day day : result) {
                 Log.i(TAG, "Title : " + day.getName());
 
 

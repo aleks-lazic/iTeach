@@ -14,6 +14,8 @@ import java.util.List;
 import ch.hes.foreignlanguageschool.Assignment;
 import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
 
+import static ch.hes.foreignlanguageschool.Activities.SyncActivity.teacher;
+
 /**
  * Created by patrickclivaz on 11.04.17.
  */
@@ -108,6 +110,8 @@ public class DBAssignment {
 
         Cursor cursor = sql.rawQuery(selectQuery, null);
 
+        DBTeacher dbTeacher = new DBTeacher(db);
+
         // looping through all rows and adding to list
 
         if (cursor != null) {
@@ -120,6 +124,7 @@ public class DBAssignment {
         assignment.setDescription(cursor.getString(2));
         assignment.setDate(cursor.getString(3));
         assignment.setImageName(cursor.getString(4));
+        assignment.setTeacher(dbTeacher.getTeacherById(Integer.parseInt(cursor.getString(5))));
         boolean flag = (Integer.parseInt(cursor.getString(6)) > 0);
         assignment.setAddedToCalendar(flag);
 
@@ -170,6 +175,23 @@ public class DBAssignment {
 
     }
 
+    public int getMaxId(){
+        SQLiteDatabase sql = db.getReadableDatabase();
+
+        String query = "SELECT MAX("+db.getKeyId()+") FROM " + db.getTableAssignement();
+
+        Cursor cursor = sql.rawQuery(query, null);
+
+        int id = -1;
+        if(cursor != null){
+            cursor.moveToFirst();
+        }
+
+        id = cursor.getInt(0);
+
+        return id;
+    }
+
     /**
      * @return
      */
@@ -213,11 +235,52 @@ public class DBAssignment {
         Log.e("Aleks", "All assignments into the cloud");
     }
 
+    public void syncAssigmentToCloud(Assignment a){
+
+        com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment assignment = new com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment();
+
+        assignment.setId((long) a.getId());
+        assignment.setTitle(a.getTitle());
+        assignment.setDescription(a.getDescription());
+        assignment.setDate(a.getDate());
+        Teacher teacher = new Teacher();
+        teacher.setId((long) a.getTeacher().getId());
+        teacher.setFirstName(a.getTeacher().getFirstName());
+        teacher.setLastName(a.getTeacher().getLastName());
+        teacher.setMail(a.getTeacher().getMail());
+        teacher.setImageName(a.getTeacher().getImageName());
+        assignment.setTeacher(teacher);
+        assignment.setImageName(a.getImageName());
+        assignment.setAddedToCalendar(a.isAddedToCalendar());
+
+        new AssignmentAsyncTask(assignment).execute();
+
+    }
+
+    public void deleteAssignmentInCloud(Assignment a){
+        com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment assignment = new com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment();
+
+        assignment.setId((long) a.getId());
+        assignment.setTitle(a.getTitle());
+        assignment.setDescription(a.getDescription());
+        assignment.setDate(a.getDate());
+        Teacher teacher = new Teacher();
+        teacher.setId((long) a.getTeacher().getId());
+        teacher.setFirstName(a.getTeacher().getFirstName());
+        teacher.setLastName(a.getTeacher().getLastName());
+        teacher.setMail(a.getTeacher().getMail());
+        teacher.setImageName(a.getTeacher().getImageName());
+        assignment.setTeacher(teacher);
+        assignment.setImageName(a.getImageName());
+        assignment.setAddedToCalendar(a.isAddedToCalendar());
+
+        new AssignmentAsyncTask(assignment, true).execute();
+
+    }
+
     public void retrieveAssignments(List<com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment> assignments) {
 
         SQLiteDatabase sql = db.getReadableDatabase();
-
-        sql.delete(db.getTableAssignement(), null, null);
 
         for (com.example.patrickclivaz.myapplication.backend.assignmentApi.model.Assignment a : assignments
                 ) {

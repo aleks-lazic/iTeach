@@ -40,7 +40,7 @@ public class TeacherEndpoint {
 
     private static final Logger logger = Logger.getLogger(TeacherEndpoint.class.getName());
 
-    private static final int DEFAULT_LIST_LIMIT = 20;
+    private static final int DEFAULT_LIST_LIMIT = 2;
 
     static {
         // Typically you would register this inside an OfyServive wrapper. See: https://code.google.com/p/objectify-appengine/wiki/BestPractices

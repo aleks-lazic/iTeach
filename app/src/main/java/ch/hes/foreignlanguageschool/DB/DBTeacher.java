@@ -182,11 +182,23 @@ public class DBTeacher {
         Log.e("Aleks", "All teachers into the cloud");
     }
 
+    public void syncTeacherToCloud(Teacher t){
+        com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher teacher = new com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher();
+
+        teacher.setId((long) t.getId());
+        teacher.setFirstName(t.getFirstName());
+        teacher.setLastName(t.getLastName());
+        teacher.setMail(t.getMail());
+        teacher.setImageName(t.getImageName());
+
+        new TeacherAsyncTask(teacher).execute();
+
+    }
+
     public void retrieveTeacher(List<com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher> teachers) {
 
         SQLiteDatabase sql = db.getReadableDatabase();
 
-        sql.delete(db.getTableTeacher(), null, null);
         Log.d("TeacherAsync", " taille table teacher " + getNumberOfRowsInTableTeacher());
 
         for (com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher t : teachers

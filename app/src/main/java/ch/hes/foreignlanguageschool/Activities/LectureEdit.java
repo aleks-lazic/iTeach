@@ -240,9 +240,18 @@ public class LectureEdit extends AppCompatActivity {
                 dbLecture.updateDayTime(lecture.getId(), lecture.getIdDay(), idDay, timeFrom, timeTo);
                 dbLecture.deleteLectureFromLectureStudent(lecture.getId());
                 dbLecture.addStudentsToLecture(students, lecture.getId());
+
+                lecture = dbLecture.getLectureByIdForUpdate(lecture.getId());
+                lecture.setStudentsList(dbStudent.getStudentsListByLecture(lecture.getId()));
+                dbLecture.syncLectureToCloud(lecture);
             } else {
                 dbLecture.insertLectureWithTeacherDayAndHoursAndStudents
                         (title, description, idTeacher, idDay, timeFrom, timeTo, students);
+
+                int idMax = dbLecture.getMaxId();
+                lecture = dbLecture.getLectureByIdForUpdate(idMax);
+                lecture.setStudentsList(dbStudent.getStudentsListByLecture(idMax));
+                dbLecture.syncLectureToCloud(lecture);
             }
 
             finish();

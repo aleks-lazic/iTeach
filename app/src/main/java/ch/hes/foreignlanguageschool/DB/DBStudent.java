@@ -92,6 +92,24 @@ public class DBStudent {
         return student;
     }
 
+    public int getMaxId() {
+        SQLiteDatabase sql = db.getWritableDatabase();
+
+        int id = 0;
+        String query = "SELECT MAX(" + db.getKeyId() + ") FROM " + db.getTableLecture();
+
+        Cursor cursor = sql.rawQuery(query, null);
+
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            id = cursor.getInt(0);
+        }
+
+
+
+        return id;
+    }
+
     /**
      * get all students for a lecture
      *
@@ -264,11 +282,45 @@ public class DBStudent {
         Log.e("Aleks", "All students into the cloud");
     }
 
+    public void syncStudentToCloud(Student s){
+        com.example.patrickclivaz.myapplication.backend.studentApi.model.Student student = new com.example.patrickclivaz.myapplication.backend.studentApi.model.Student();
+
+        student.setId((long) s.getId());
+        student.setFirstName(s.getFirstName());
+        student.setLastName(s.getLastName());
+        student.setAddress(s.getAddress());
+        student.setCountry(s.getCountry());
+        student.setMail(s.getMail());
+        student.setStartDate(s.getStartDate());
+        student.setEndDate(s.getEndDate());
+        student.setImageName(s.getImageName());
+
+
+        new StudentAsyncTask(student).execute();
+
+    }
+
+    public void deleteStudentInCloud(Student s){
+        com.example.patrickclivaz.myapplication.backend.studentApi.model.Student student = new com.example.patrickclivaz.myapplication.backend.studentApi.model.Student();
+
+        student.setId((long) s.getId());
+        student.setFirstName(s.getFirstName());
+        student.setLastName(s.getLastName());
+        student.setAddress(s.getAddress());
+        student.setCountry(s.getCountry());
+        student.setMail(s.getMail());
+        student.setStartDate(s.getStartDate());
+        student.setEndDate(s.getEndDate());
+        student.setImageName(s.getImageName());
+
+
+        new StudentAsyncTask(student, true).execute();
+
+    }
+
     public void retrieveStudents(List<com.example.patrickclivaz.myapplication.backend.studentApi.model.Student> students) {
 
         SQLiteDatabase sql = db.getReadableDatabase();
-
-        sql.delete(db.getTableStudent(), null, null);
 
         for (com.example.patrickclivaz.myapplication.backend.studentApi.model.Student s : students
                 ) {

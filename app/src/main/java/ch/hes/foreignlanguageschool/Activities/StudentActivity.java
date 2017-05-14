@@ -119,6 +119,7 @@ public class StudentActivity extends AppCompatActivity {
 
         if (id == R.id.action_delete) {
             dbStudent.deleteStudent(student.getId());
+            dbStudent.deleteStudentInCloud(student);
             finish();
             Toast toast = Toast.makeText(this, student.toString() + " " + getResources().getString(R.string.Student) + " " + getResources().getString(R.string.DeletedSuccess), Toast.LENGTH_SHORT);
             toast.show();

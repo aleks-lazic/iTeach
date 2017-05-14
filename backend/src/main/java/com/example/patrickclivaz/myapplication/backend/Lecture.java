@@ -25,7 +25,7 @@ public class Lecture implements Serializable {
     private Teacher teacher = new Teacher();
     private List<Student> studentsList = new ArrayList<Student>();
     private String imageName;
-    private Day day = new Day();
+    private int idDay;
     private String startTime;
     private String endTime;
 
@@ -82,12 +82,12 @@ public class Lecture implements Serializable {
         this.imageName = imageName;
     }
 
-    public Day getDay() {
-        return day;
+    public int getIdDay() {
+        return idDay;
     }
 
     public void setDay(Day day) {
-        this.day = day;
+        this.idDay = idDay;
     }
 
     public String getStartTime() {

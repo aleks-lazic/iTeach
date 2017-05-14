@@ -2,6 +2,7 @@ package ch.hes.foreignlanguageschool;
 
 
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
 
 import com.example.patrickclivaz.myapplication.backend.assignmentApi.AssignmentApi;
@@ -25,9 +26,15 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
     private static AssignmentApi assignmentApi = null;
     private static final String TAG = AssignmentAsyncTask.class.getName();
     private Assignment assignment;
+    private boolean delete;
 
     public AssignmentAsyncTask(){
 
+    }
+
+    public AssignmentAsyncTask(Assignment assignment, boolean delete){
+        this.assignment = assignment;
+        this.delete = delete;
     }
 
     public AssignmentAsyncTask(Assignment assignment) {
@@ -77,20 +84,38 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
     @Override
     protected void onPostExecute(List<Assignment> result) {
 
-        if (SyncActivity.lastAssignmentResult.equals(result)) {
+
+        if(delete){
+            try {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                Log.e("DELETE", "JE SUPPRIME L'ASSIGNMENT MON GARS");
+                assignmentApi.remove(assignment.getId()).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             return;
         }
 
-        SyncActivity.lastAssignmentResult = result;
-
-        if(assignment != null){
-            return;
-        }
 
 
-        DBAssignment dbAssignment = new DBAssignment(SyncActivity.databaseHelper);
-        dbAssignment.retrieveAssignments(result);
+
         if (result != null) {
+
+            if (SyncActivity.lastAssignmentResult.equals(result)) {
+                return;
+            }
+
+            SyncActivity.lastAssignmentResult = result;
+
+            if(assignment != null){
+                return;
+            }
+
+            DBAssignment dbAssignment = new DBAssignment(SyncActivity.databaseHelper);
+            dbAssignment.retrieveAssignments(result);
+
             for (Assignment assignment : result) {
                 Log.i(TAG, "Title : " + assignment.getTitle());
 

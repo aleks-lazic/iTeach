@@ -88,10 +88,12 @@ public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
         }
 
 
-        DBTeacher dbTeacher = new DBTeacher(SyncActivity.databaseHelper);
-        dbTeacher.retrieveTeacher(result);
 
         if (result != null) {
+
+            DBTeacher dbTeacher = new DBTeacher(SyncActivity.databaseHelper);
+            dbTeacher.retrieveTeacher(result);
+
             for (Teacher t : result) {
                 Log.e(TAG, "Teacher name : " + t.getFirstName() + "Teacher id : " + t.getId());
             }

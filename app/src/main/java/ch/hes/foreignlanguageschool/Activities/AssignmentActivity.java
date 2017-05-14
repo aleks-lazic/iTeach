@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import ch.hes.foreignlanguageschool.Assignment;
+import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.R;
@@ -77,6 +78,7 @@ public class AssignmentActivity extends AppCompatActivity {
 
         if (id == R.id.action_delete) {
             dbAssignment.deleteAssignmentById(assignment.getId());
+            dbAssignment.deleteAssignmentInCloud(assignment);
             finish();
             Toast toast = Toast.makeText(this, assignment.toString() + " " + getResources().getString(R.string.Assignment) + " " + getResources().getString(R.string.DeletedSuccess), Toast.LENGTH_SHORT);
             toast.show();

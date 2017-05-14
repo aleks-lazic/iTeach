@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 import javax.annotation.Nullable;
 import javax.inject.Named;
 
+import sun.rmi.runtime.Log;
+
 import static com.googlecode.objectify.ObjectifyService.ofy;
 
 /**

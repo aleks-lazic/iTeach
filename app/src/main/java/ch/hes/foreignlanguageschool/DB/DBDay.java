@@ -139,9 +139,6 @@ public class DBDay {
 
     public void retrieveDays(List<com.example.patrickclivaz.myapplication.backend.dayApi.model.Day> days) {
 
-        SQLiteDatabase sql = db.getReadableDatabase();
-
-        sql.delete(db.getTableDay(), null, null);
 
         for (com.example.patrickclivaz.myapplication.backend.dayApi.model.Day d : days
                 ) {

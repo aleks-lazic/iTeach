@@ -21,6 +21,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import ch.hes.foreignlanguageschool.Assignment;
+import ch.hes.foreignlanguageschool.AssignmentAsyncTask;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DatabaseHelper;
 import ch.hes.foreignlanguageschool.R;
@@ -144,9 +145,11 @@ public class AssignmentEdit extends AppCompatActivity {
             if (assignment != null) {
                 //update the current assignment
                 dbAssignment.updateAssignmentById(assignment.getId(), title, description, date, isChecked);
+                dbAssignment.syncAssigmentToCloud(dbAssignment.getAssignmentById(assignment.getId()));
             } else {
                 //insert everything in DB
                 dbAssignment.insertValues(title, description, date, idTeacher, isChecked);
+                dbAssignment.syncAssigmentToCloud(dbAssignment.getAssignmentById(dbAssignment.getMaxId()));
             }
 
 
@@ -254,4 +257,6 @@ public class AssignmentEdit extends AppCompatActivity {
         InputMethodManager mgr = (InputMethodManager) c.getSystemService(Context.INPUT_METHOD_SERVICE);
         mgr.hideSoftInputFromWindow(windowToken, 0);
     }
+
+
 }

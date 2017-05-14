@@ -135,8 +135,10 @@ public class StudentEdit extends AppCompatActivity {
 
             if (student != null) {
                 dbStudent.updateStudentById(student.getId(), firstname, lastname, address, country, mail, startDate, endDate);
+                dbStudent.syncStudentToCloud(dbStudent.getStudentById(student.getId()));
             } else {
                 dbStudent.insertValues(firstname, lastname, address, country, mail, startDate, endDate);
+                dbStudent.syncStudentToCloud(dbStudent.getStudentById(dbStudent.getMaxId()));
             }
             finish();
         }

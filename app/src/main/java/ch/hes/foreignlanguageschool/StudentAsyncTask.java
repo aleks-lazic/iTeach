@@ -2,6 +2,7 @@ package ch.hes.foreignlanguageschool;
 
 
 import android.os.AsyncTask;
+import android.os.StrictMode;
 import android.util.Log;
 
 
@@ -21,14 +22,22 @@ import ch.hes.foreignlanguageschool.Activities.SyncActivity;
 import ch.hes.foreignlanguageschool.DB.DBAssignment;
 import ch.hes.foreignlanguageschool.DB.DBStudent;
 
+import static ch.hes.foreignlanguageschool.R.string.delete;
+
 
 public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
     private static StudentApi studentApi = null;
     private static final String TAG = StudentAsyncTask.class.getName();
     private Student student;
+    private boolean delete;
 
     public StudentAsyncTask(){
 
+    }
+
+    public StudentAsyncTask(Student student, boolean delete) {
+        this.student = student;
+        this.delete = delete;
     }
 
 
@@ -79,21 +88,35 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
     @Override
     protected void onPostExecute(List<Student> result) {
 
-        if (SyncActivity.lastStudentResult.equals(result)) {
+        if(delete){
+            try {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+                Log.e("DELETE", "DELETE STUDENT");
+                Log.e("DELETE", "ID : " + student.getId());
+                studentApi.remove(student.getId()).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             return;
         }
-
-        SyncActivity.lastStudentResult = result;
-
-        if(student != null){
-            return;
-        }
-
-
-        DBStudent dbStudent = new DBStudent(SyncActivity.databaseHelper);
-        dbStudent.retrieveStudents(result);
 
         if (result != null) {
+
+            if (SyncActivity.lastStudentResult.equals(result)) {
+                return;
+            }
+
+            SyncActivity.lastStudentResult = result;
+
+            if(student != null){
+                return;
+            }
+
+            DBStudent dbStudent = new DBStudent(SyncActivity.databaseHelper);
+            dbStudent.retrieveStudents(result);
+
             for (Student s : result) {
                 Log.i(TAG, "Title : " + s.getFirstName() + "\n result size : " + result.size());
             }
