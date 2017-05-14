@@ -40,11 +40,12 @@ public class DBLecture {
      * @param description
      * @param idTeacher
      */
-    public void insertValues(String name, String description, long idTeacher) {
+    public void insertValues(long id, String name, String description, long idTeacher) {
 
         SQLiteDatabase sql = db.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(db.getKeyId(), id);
         values.put(db.getLECTURE_NAME(), name);
         values.put(db.getLECTURE_DESCRIPTION(), description);
         values.put(db.getIMAGE_NAME(), "lecture_icon");
@@ -446,11 +447,9 @@ public class DBLecture {
      * @param endTime
      * @param students
      */
-    public void insertLectureWithTeacherDayAndHoursAndStudents(String title, String description, long idTeacher, int idDay, String beginTime, String endTime, ArrayList<Student> students) {
+    public void insertLectureWithTeacherDayAndHoursAndStudents(int id, String title, String description, long idTeacher, int idDay, String beginTime, String endTime, ArrayList<Student> students) {
 
-        insertValues(title, description, idTeacher);
-
-        int id = getMaxId();
+        insertValues(id, title, description, idTeacher);
 
         addDayAndHoursToLecture(id, idDay, beginTime, endTime);
 
@@ -679,26 +678,13 @@ public class DBLecture {
             //create the lecture's students
             dbStudent = new DBStudent(db);
             l.setStudentsList(dbStudent.getStudentsListByLecture(l.getId()));
-            ArrayList<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student> students = new ArrayList<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student>();
+            List<Integer> studentsId = new ArrayList<Integer>();
             for (Student s : l.getStudentsList()
                     ) {
-
-                com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student student = new com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student();
-
-                student.setId((long) s.getId());
-                student.setFirstName(s.getFirstName());
-                student.setLastName(s.getLastName());
-                student.setAddress(s.getAddress());
-                student.setCountry(s.getCountry());
-                student.setMail(s.getMail());
-                student.setStartDate(s.getStartDate());
-                student.setEndDate(s.getEndDate());
-                student.setImageName(s.getImageName());
-
-                students.add(student);
+                studentsId.add(s.getId());
             }
 
-//            lecture.setStudentsList(students);
+            lecture.setStudentsList(studentsId);
 
             new LectureAsyncTask(lecture).execute();
 
@@ -731,26 +717,13 @@ public class DBLecture {
         //create the lecture's students
         dbStudent = new DBStudent(db);
         l.setStudentsList(dbStudent.getStudentsListByLecture(l.getId()));
-        ArrayList<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student> students = new ArrayList<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student>();
+        List<Integer> studentsId = new ArrayList<Integer>();
         for (Student s : l.getStudentsList()
                 ) {
-
-            com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student student = new com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student();
-
-            student.setId((long) s.getId());
-            student.setFirstName(s.getFirstName());
-            student.setLastName(s.getLastName());
-            student.setAddress(s.getAddress());
-            student.setCountry(s.getCountry());
-            student.setMail(s.getMail());
-            student.setStartDate(s.getStartDate());
-            student.setEndDate(s.getEndDate());
-            student.setImageName(s.getImageName());
-
-            students.add(student);
+            studentsId.add(s.getId());
         }
 
-//        lecture.setStudentsList(students);
+        lecture.setStudentsList(studentsId);
 
         new LectureAsyncTask(lecture).execute();
     }
@@ -778,24 +751,14 @@ public class DBLecture {
         //create the lecture's students
         dbStudent = new DBStudent(db);
         l.setStudentsList(dbStudent.getStudentsListByLecture(l.getId()));
-        ArrayList<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student> students = new ArrayList<com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student>();
+        List<Integer> studentsId = new ArrayList<Integer>();
         for (Student s : l.getStudentsList()
                 ) {
-
-            com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student student = new com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student();
-
-            student.setId((long) s.getId());
-            student.setFirstName(s.getFirstName());
-            student.setLastName(s.getLastName());
-            student.setAddress(s.getAddress());
-            student.setCountry(s.getCountry());
-            student.setMail(s.getMail());
-            student.setStartDate(s.getStartDate());
-            student.setEndDate(s.getEndDate());
-            student.setImageName(s.getImageName());
-
-            students.add(student);
+            studentsId.add(s.getId());
         }
+
+        lecture.setStudentsList(studentsId);
+
 
 
         new LectureAsyncTask(lecture, true).execute();
@@ -810,13 +773,13 @@ public class DBLecture {
                 ) {
 
             //insert the lecture's values
-            insertValues(l.getName(), l.getDescription(), (Integer.parseInt(l.getTeacher().getId()+"")));
+            insertValues(l.getId(),l.getName(), l.getDescription(), (Integer.parseInt(l.getTeacher().getId()+"")));
 
             //insert the student
-//            for (com.example.patrickclivaz.myapplication.backend.lectureApi.model.Student s : l.getStudentsList()
-//                 ) {
-//                addStudentToLecture(Integer.parseInt(s.getId()+""),Integer.parseInt(l.getId()+""));
-//            }
+            for (Integer i : l.getStudentsList()
+                 ) {
+                addStudentToLecture(i,Integer.parseInt(l.getId()+""));
+            }
 
             addDayAndHoursToLecture(Integer.parseInt(l.getId()+""), l.getIdDay(),l.getStartTime(), l.getEndTime());
         }

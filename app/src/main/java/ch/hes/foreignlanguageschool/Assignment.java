@@ -15,7 +15,6 @@ public class Assignment implements Serializable {
     private Teacher teacher;
     private String imageName;
     private boolean addedToCalendar;
-    private long idGoogleAppEngine;
 
     public Assignment(int id, String title, String description, String date, Teacher teacher) {
         this.id = id;
@@ -89,11 +88,4 @@ public class Assignment implements Serializable {
         this.addedToCalendar = addedToCalendar;
     }
 
-    public long getIdGoogleAppEngine() {
-        return idGoogleAppEngine;
-    }
-
-    public void setIdGoogleAppEngine(long idGoogleAppEngine) {
-        this.idGoogleAppEngine = idGoogleAppEngine;
-    }
 }

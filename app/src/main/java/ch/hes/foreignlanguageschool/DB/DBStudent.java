@@ -28,22 +28,12 @@ public class DBStudent {
         this.db = db;
     }
 
-    /**
-     * Insert all values for teacher
-     *
-     * @param firstName
-     * @param lastName
-     * @param address
-     * @param country
-     * @param mail
-     * @param startDate
-     * @param endDate
-     */
-    public void insertValues(String firstName, String lastName, String address, String country, String mail, String startDate, String endDate) {
+    public void insertValues(String firstName, String lastName, String address, String country, String mail, String startDate, String endDate, long idCloud) {
 
         SQLiteDatabase sql = db.getWritableDatabase();
 
         ContentValues values = new ContentValues();
+        values.put(db.getKeyId(), idCloud);
         values.put(db.getSTUDENT_FIRSTNAME(), firstName);
         values.put(db.getSTUDENT_LASTNAME(), lastName);
         values.put(db.getSTUDENT_ADDRESS(), address);
@@ -63,7 +53,7 @@ public class DBStudent {
      * @param idStudent
      * @return
      */
-    public Student getStudentById(int idStudent) {
+    public Student getStudentById(long idStudent) {
         SQLiteDatabase sql = db.getWritableDatabase();
 
         Student student = new Student();
@@ -85,24 +75,21 @@ public class DBStudent {
         student.setEndDate(cursor.getString(7));
         student.setImageName(cursor.getString(8));
 
-
-
-
         // return teacher
         return student;
     }
 
-    public int getMaxId() {
+    public long getMaxId() {
         SQLiteDatabase sql = db.getWritableDatabase();
 
-        int id = 0;
-        String query = "SELECT MAX(" + db.getKeyId() + ") FROM " + db.getTableLecture();
+        long id = 0;
+        String query = "SELECT MAX(" + db.getKeyId() + ") FROM " + db.getTableStudent();
 
         Cursor cursor = sql.rawQuery(query, null);
 
         if (cursor.getCount() > 0) {
             cursor.moveToFirst();
-            id = cursor.getInt(0);
+            id = cursor.getLong(0);
         }
 
 
@@ -175,9 +162,6 @@ public class DBStudent {
                 studentsList.add(student);
             } while (cursor.moveToNext());
         }
-
-
-
 
         // return students list
         return studentsList;
@@ -314,7 +298,7 @@ public class DBStudent {
         student.setImageName(s.getImageName());
 
 
-        new StudentAsyncTask(student, true).execute();
+        new StudentAsyncTask(student, true, student.getId()).execute();
 
     }
 
@@ -324,7 +308,7 @@ public class DBStudent {
 
         for (com.example.patrickclivaz.myapplication.backend.studentApi.model.Student s : students
                 ) {
-            insertValues(s.getFirstName(), s.getLastName(), s.getAddress(), s.getCountry(), s.getMail(), s.getStartDate(), s.getEndDate());
+            insertValues(s.getFirstName(), s.getLastName(), s.getAddress(), s.getCountry(), s.getMail(), s.getStartDate(), s.getEndDate(), s.getId());
         }
     }
 }

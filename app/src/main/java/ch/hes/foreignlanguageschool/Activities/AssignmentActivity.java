@@ -78,7 +78,7 @@ public class AssignmentActivity extends AppCompatActivity {
 
         if (id == R.id.action_delete) {
             dbAssignment.deleteAssignmentById(assignment.getId());
-            dbAssignment.deleteAssignmentInCloud(assignment, assignment.getIdGoogleAppEngine());
+            dbAssignment.deleteAssignmentInCloud(assignment, assignment.getId());
             finish();
             Toast toast = Toast.makeText(this, assignment.toString() + " " + getResources().getString(R.string.Assignment) + " " + getResources().getString(R.string.DeletedSuccess), Toast.LENGTH_SHORT);
             toast.show();

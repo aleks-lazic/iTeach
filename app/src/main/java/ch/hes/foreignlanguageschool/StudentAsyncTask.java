@@ -30,14 +30,16 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
     private static final String TAG = StudentAsyncTask.class.getName();
     private Student student;
     private boolean delete;
+    private long idToDelete;
 
     public StudentAsyncTask(){
 
     }
 
-    public StudentAsyncTask(Student student, boolean delete) {
+    public StudentAsyncTask(Student student, boolean delete, long idToDelete) {
         this.student = student;
         this.delete = delete;
+        this.idToDelete = idToDelete;
     }
 
 
@@ -92,8 +94,8 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
             try {
                 StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
                 StrictMode.setThreadPolicy(policy);
-                Log.e("DELETE", "DELETE STUDENT");
-                Log.e("DELETE", "ID : " + student.getId());
+                Log.e("DELETE", "DELETE STUDENT + ID : " + idToDelete);
+                Log.e("DELETE", "ID : " + idToDelete);
                 studentApi.remove(student.getId()).execute();
             } catch (IOException e) {
                 e.printStackTrace();

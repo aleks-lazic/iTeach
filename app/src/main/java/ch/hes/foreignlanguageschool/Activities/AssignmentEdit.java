@@ -148,7 +148,7 @@ public class AssignmentEdit extends AppCompatActivity {
                 dbAssignment.syncAssigmentToCloud(dbAssignment.getAssignmentById(assignment.getId()));
             } else {
                 //insert everything in DB
-                dbAssignment.insertValues(title, description, date, idTeacher, isChecked);
+                dbAssignment.insertValues(title, description, date, idTeacher, isChecked, dbAssignment.getMaxId() + 1);
                 dbAssignment.syncAssigmentToCloud(dbAssignment.getAssignmentById(dbAssignment.getMaxId()));
             }
 

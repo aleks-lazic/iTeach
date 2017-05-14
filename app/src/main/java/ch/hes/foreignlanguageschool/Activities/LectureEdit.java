@@ -218,7 +218,7 @@ public class LectureEdit extends AppCompatActivity {
 
             //get the day from spinner
             int position = spinnerDays.getSelectedItemPosition() + 1;
-            Log.d("Aleks", ""+position);
+            Log.d("Aleks", "" + position);
             day = dbDay.getDayById(position);
 
             //insert everything in DB
@@ -245,13 +245,18 @@ public class LectureEdit extends AppCompatActivity {
                 lecture.setStudentsList(dbStudent.getStudentsListByLecture(lecture.getId()));
                 dbLecture.syncLectureToCloud(lecture);
             } else {
+                long maxId = dbLecture.getMaxId();
+                long addition = 1l;
+                long newId = maxId + addition;
+                int idLecture = Integer.parseInt(newId + "");
                 dbLecture.insertLectureWithTeacherDayAndHoursAndStudents
-                        (title, description, idTeacher, idDay, timeFrom, timeTo, students);
+                        (dbLecture.getMaxId() + 1, title, description, idTeacher, idDay, timeFrom, timeTo, students);
 
                 int idMax = dbLecture.getMaxId();
                 lecture = dbLecture.getLectureByIdForUpdate(idMax);
                 lecture.setStudentsList(dbStudent.getStudentsListByLecture(idMax));
                 dbLecture.syncLectureToCloud(lecture);
+
             }
 
             finish();

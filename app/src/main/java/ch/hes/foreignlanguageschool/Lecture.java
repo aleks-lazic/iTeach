@@ -18,7 +18,6 @@ public class Lecture implements Serializable {
     private int idDay;
     private String startTime;
     private String endTime;
-    private int idGoogleAppEngine;
 
 
     public Lecture(int id, String name, String description, Teacher teacher) {
@@ -108,11 +107,4 @@ public class Lecture implements Serializable {
         return name;
     }
 
-    public int getIdGoogleAppEngine() {
-        return idGoogleAppEngine;
-    }
-
-    public void setIdGoogleAppEngine(int idGoogleAppEngine) {
-        this.idGoogleAppEngine = idGoogleAppEngine;
-    }
 }

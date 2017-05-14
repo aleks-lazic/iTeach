@@ -26,10 +26,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //Common column names
     private final String KEY_ID = "id";
 
-
-
-    private final String CLOUD_ID = "Cloud_id";
-
     private final String IMAGE_NAME = "ImageName";
 
     //Assignment Table - column names
@@ -49,7 +45,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final String STUDENT_ENDDATE = "EndDate";
 
     public final String CREATE_STUDENT_TABLE = "CREATE TABLE " + TABLE_STUDENT + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + KEY_ID + " INTEGER PRIMARY KEY, "
             + STUDENT_FIRSTNAME + " TEXT NOT NULL, "
             + STUDENT_LASTNAME + " TEXT NOT NULL, "
             + STUDENT_ADDRESS + " TEXT, "
@@ -57,8 +53,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + STUDENT_MAIL + " TEXT NOT NULL, "
             + STUDENT_STARTDATE + " TEXT NOT NULL, "
             + STUDENT_ENDDATE + " TEXT, "
-            + IMAGE_NAME + " TEXT, "
-            + CLOUD_ID + " INTEGER);";
+            + IMAGE_NAME + " TEXT);";
 
     //Lecture Table - column names
     private final String LECTURE_NAME = "Name";
@@ -86,23 +81,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + IMAGE_NAME + " TEXT);";
 
     private final String CREATE_LECTURE_TABLE = "CREATE TABLE " + TABLE_LECTURE + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + KEY_ID + " INTEGER PRIMARY KEY, "
             + LECTURE_NAME + " TEXT NOT NULL, "
             + LECTURE_DESCRIPTION + " TEXT NOT NULL, "
             + IMAGE_NAME + " TEXT NOT NULL, "
             + LECTURE_FKTEACHER + " TEXT NOT NULL, "
-            + CLOUD_ID + " INTEGER, "
             + "FOREIGN KEY(" + LECTURE_FKTEACHER + ") REFERENCES " + TABLE_TEACHER + "(" + KEY_ID + "));";
 
     private final String CREATE_ASSIGNMENT_TABLE = "CREATE TABLE " + TABLE_ASSIGNEMENT + "("
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + KEY_ID + " INTEGER PRIMARY KEY, "
             + ASSIGNMENT_TITLE + " TEXT NOT NULL, "
             + ASSIGNMENT_DESCRIPTION + " TEXT, "
             + ASSIGNMENT_DATE + " TEXT, "
             + IMAGE_NAME + " TEXT NOT NULL, "
             + ASSIGNMENT_FKTEACHER + " TEXT NOT NULL, "
             + ASSIGNMENT_ADDTOCALENDAR + " INTEGER NOT NULL, "
-            + CLOUD_ID + " INTEGER, "
             + "FOREIGN KEY(" + ASSIGNMENT_FKTEACHER + ") REFERENCES " + TABLE_TEACHER + "(" + KEY_ID + "));";
 
     private final String CREATE_DAY_TABLE = "CREATE TABLE " + TABLE_DAY + "("
@@ -297,7 +290,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return ASSIGNMENT_ADDTOCALENDAR;
     }
 
-    public String getCLOUD_ID() {
-        return CLOUD_ID;
-    }
 }

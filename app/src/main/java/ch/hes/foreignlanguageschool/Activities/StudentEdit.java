@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -137,8 +138,11 @@ public class StudentEdit extends AppCompatActivity {
                 dbStudent.updateStudentById(student.getId(), firstname, lastname, address, country, mail, startDate, endDate);
                 dbStudent.syncStudentToCloud(dbStudent.getStudentById(student.getId()));
             } else {
-                dbStudent.insertValues(firstname, lastname, address, country, mail, startDate, endDate);
-                dbStudent.syncStudentToCloud(dbStudent.getStudentById(dbStudent.getMaxId()));
+                long maxId = dbStudent.getMaxId();
+                long addition = 1l;
+                long newId = maxId + addition;
+                dbStudent.insertValues(firstname, lastname, address, country, mail, startDate, endDate, newId);
+                dbStudent.syncStudentToCloud(dbStudent.getStudentById(newId));
             }
             finish();
         }
@@ -280,6 +284,7 @@ public class StudentEdit extends AppCompatActivity {
 
     /**
      * Set the cursot at the end of the editText
+     *
      * @param editText
      */
     public void cursorAtEnd(EditText editText) {
