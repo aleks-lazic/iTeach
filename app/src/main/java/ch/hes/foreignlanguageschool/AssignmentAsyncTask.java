@@ -70,6 +70,7 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
             // For instance insert
             if (assignment != null) {
                 assignmentApi.insert(assignment).execute();
+                SyncActivity.assignmentTask = true;
                 Log.i(TAG, "insert assignment");
             }
             // and for instance return the list of all employees
@@ -124,6 +125,8 @@ public class AssignmentAsyncTask extends AsyncTask<Void, Void, List<Assignment>>
                 Log.i(TAG, "Teacher name: " + assignment.getTeacher().getFirstName());
 
             }
+
+            SyncActivity.assignmentTask = true;
         }
     }
 }

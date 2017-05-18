@@ -73,6 +73,7 @@ public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
             // For instance insert
             if (lecture != null) {
                 lectureApi.insert(lecture).execute();
+                SyncActivity.lectureTask = true;
                 Log.i(TAG, "insert lecture");
             }
             // and for instance return the list of all employees
@@ -116,14 +117,13 @@ public class LectureAsyncTask extends AsyncTask<Void, Void, List<Lecture>> {
             DBLecture dbLecture = new DBLecture(SyncActivity.databaseHelper);
             dbLecture.retrieveLecture(result);
 
-            if (result != null) {
                 for (Lecture l : result) {
                     Log.i(TAG, "Title : " + l.getName());
 
                     Log.i(TAG, "Teacher name : " + l.getTeacher().getFirstName());
-
-                }
             }
+
+            SyncActivity.lectureTask = true;
         }
     }
 }

@@ -61,6 +61,7 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
             // For instance insert
             if (day != null) {
                 dayApi.insert(day).execute();
+                SyncActivity.dayTask = true;
                 Log.i(TAG, "insert day");
             }
             // and for instance return the list of all employees
@@ -98,6 +99,9 @@ public class DayAsyncTask extends AsyncTask<Void, Void, List<Day>> {
 
 
             }
+
+            SyncActivity.dayTask = true;
+
         }
     }
 }

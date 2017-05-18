@@ -31,11 +31,14 @@ import com.example.patrickclivaz.myapplication.backend.teacherApi.model.Teacher;
 public class SyncActivity extends AppCompatActivity {
 
     public static DatabaseHelper databaseHelper;
-    private DBTeacher dbTeacher ;
+    private DBTeacher dbTeacher;
 
-    private ProgressBar progressBar;
-    private int progression = 0;
-    private Handler mHandler = new Handler();
+    public static boolean assignmentTask ;
+    public static boolean lectureTask;
+    public static boolean dayTask = false;
+    public static boolean studentTask;
+    public static boolean teacherTask;
+
 
     //List for comparing
     public static List<Lecture> lastLectureResult = new ArrayList<Lecture>();
@@ -48,15 +51,10 @@ public class SyncActivity extends AppCompatActivity {
     public static ch.hes.foreignlanguageschool.Teacher teacher;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sync);
-
-        //get the progress bar
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //get for DB
         databaseHelper = DatabaseHelper.getInstance(getApplicationContext());
@@ -65,15 +63,26 @@ public class SyncActivity extends AppCompatActivity {
         //delete current content on DB
         deleteDatabase(databaseHelper.getDatabaseName());
 
+        //set all boolean tasks to false
+        initializeTasks();
+
         //retrieve data from the cloud
         getCloudRetrieve();
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while(dbTeacher.getNumberOfRowsInTableTeacher() != 1){
-                    Log.d("Aleks", " "+dbTeacher.getNumberOfRowsInTableTeacher());
+                while (dbTeacher.getNumberOfRowsInTableTeacher() != 1) {
+                    Log.d("Aleks", " " + dbTeacher.getNumberOfRowsInTableTeacher());
 
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                while (!checkTasks()) {
                     try {
                         Thread.sleep(1000);
                     } catch (InterruptedException e) {
@@ -98,5 +107,22 @@ public class SyncActivity extends AppCompatActivity {
     }
 
 
+    public static boolean checkTasks() {
 
+        if (teacherTask)
+            if (assignmentTask)
+                if (studentTask)
+                    if (dayTask)
+                        if (lectureTask)
+                            return true;
+
+        return false;
+    }
+
+    public static void initializeTasks() {
+        assignmentTask = false;
+        lectureTask = false;
+        studentTask = false;
+        teacherTask = false;
+    }
 }

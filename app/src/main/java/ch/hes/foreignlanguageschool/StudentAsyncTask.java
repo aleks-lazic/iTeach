@@ -74,6 +74,7 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
             // For instance insert
             if (student != null) {
                 studentApi.insert(student).execute();
+                SyncActivity.studentTask = true;
                 Log.i(TAG, "insert student");
             }
             // and for instance return the list of all employees
@@ -122,6 +123,8 @@ public class StudentAsyncTask extends AsyncTask<Void, Void, List<Student>> {
             for (Student s : result) {
                 Log.i(TAG, "Title : " + s.getFirstName() + "\n result size : " + result.size());
             }
+
+            SyncActivity.studentTask = true;
         }
     }
 }

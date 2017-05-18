@@ -61,6 +61,7 @@ public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
             // For instance insert
             if (teacher != null) {
                 teacherApi.insert(teacher).execute();
+                SyncActivity.teacherTask = true;
                 Log.i(TAG, "insert teacher");
             }
             // and for instance return the list of all employees
@@ -83,10 +84,9 @@ public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
 
         SyncActivity.lastTeacherResult = result;
 
-        if(teacher != null){
+        if (teacher != null) {
             return;
         }
-
 
 
         if (result != null) {
@@ -97,6 +97,8 @@ public class TeacherAsyncTask extends AsyncTask<Void, Void, List<Teacher>> {
             for (Teacher t : result) {
                 Log.e(TAG, "Teacher name : " + t.getFirstName() + "Teacher id : " + t.getId());
             }
+
+            SyncActivity.teacherTask = true;
         }
 
     }

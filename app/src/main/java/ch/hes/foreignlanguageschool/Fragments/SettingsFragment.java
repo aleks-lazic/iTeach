@@ -38,6 +38,7 @@ import ch.hes.foreignlanguageschool.TeacherAsyncTask;
 
 import static android.R.attr.progress;
 import static android.app.ProgressDialog.show;
+import static ch.hes.foreignlanguageschool.Activities.SyncActivity.checkTasks;
 
 public class SettingsFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
@@ -126,25 +127,30 @@ public class SettingsFragment extends Fragment {
                 progressDialog = ProgressDialog.show(getActivity(), "",
                         getResources().getString(R.string.SyncProgress), false);
 
+                SyncActivity.initializeTasks();
+
                 //send data to google cloud
                 dbAssignment.syncAssignmentsToCloud();
                 dbStudent.syncStudentsToCloud();
                 dbTeacher.syncTeachersToCloud();
-                dbDay.syncDaysToCloud();
                 dbLecture.syncLecturesToCloud();
 
 
-                //set a counter for 3 seconds when sync
-                new CountDownTimer(3000, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-
-                    }
-
-                    public void onFinish() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        while (!checkTasks()) {
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
                         progressDialog.dismiss();
+
                     }
-                }.start();
+                }).start();
+
 
             }
         });
